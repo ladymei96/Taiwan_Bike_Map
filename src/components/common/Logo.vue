@@ -23,7 +23,7 @@ const props = defineProps({
     />
     <img
       :src="TaiwanRiding"
-      alt="bikeIcon"
+      alt="taiwanRiding"
       :width="size.riding.width"
       :height="size.riding.height"
     />
