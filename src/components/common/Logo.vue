@@ -1,5 +1,5 @@
 <script setup>
-import BikeIcon from '@/assets/Vector.svg';
+import BikeIcon from '@/assets/Bike.svg';
 import TaiwanRiding from '@/assets/TaiwanRiding.svg';
 
 const props = defineProps({

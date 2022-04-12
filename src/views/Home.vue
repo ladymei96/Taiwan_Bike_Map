@@ -2,6 +2,7 @@
 import Carousel from '@/components/Carousel.vue';
 import TaiwanRidingPNG from '@/assets/TaiwanRiding.png';
 import LetGo from '@/assets/Let’sGo.svg';
+import NearbyStation from '@/components/NearbyStation.vue';
 </script>
 
 <template>
@@ -28,4 +29,5 @@ import LetGo from '@/assets/Let’sGo.svg';
     </div>
     <Carousel />
   </div>
+  <NearbyStation />
 </template>

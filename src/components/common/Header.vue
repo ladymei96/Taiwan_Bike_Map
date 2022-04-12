@@ -34,7 +34,7 @@ const { isMobile } = storeToRefs(deviceStore);
 </script>
 
 <template>
-  <header class="fixed top-0 w-full z-10">
+  <header class="fixed top-0 w-full z-20">
     <MobileLogo v-if="isMobile" />
     <div class="bg-dark01 text-white font-bold">
       <div

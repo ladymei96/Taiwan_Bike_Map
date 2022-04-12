@@ -15,6 +15,12 @@ module.exports = {
         dark01: '#039ECF',
         alert: '#FFDE3F',
         tint: '#DCDCDC'
+      },
+      fontSize: {
+        '3.5xl': ['32px', '37.5px']
+      },
+      padding: {
+        '15%': '15%'
       }
     }
   },
