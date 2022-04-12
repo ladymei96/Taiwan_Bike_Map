@@ -8,6 +8,7 @@ import { useWindowSize } from 'vue-window-size';
 
 const { width: windowWidth } = useWindowSize();
 const deviceStore = userDevice();
+
 watch(windowWidth, newVal => {
   deviceStore.isMobile = newVal < 768;
 });
