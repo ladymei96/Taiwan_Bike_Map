@@ -1,8 +1,10 @@
 <script setup>
 import Logo from '@/components/common/Logo.vue';
 import MobileLogo from '@/components/Mobile/MobileLogo.vue';
-import { useWindowSize } from 'vue-window-size';
-import { computed, reactive, ref } from 'vue';
+import { reactive } from 'vue';
+import { storeToRefs } from 'pinia';
+import { userDevice } from '@/store';
+
 const MENU_LIST = reactive([
   {
     path: '/',
@@ -27,11 +29,8 @@ const PC_LOGO_SIZE = reactive({
     height: 25
   }
 });
-const { width: windowWidth } = useWindowSize();
-const isMobile = computed(() => {
-  // 整合到 store 去，參考 DD 作法
-  return windowWidth.value < 768;
-});
+const deviceStore = userDevice();
+const { isMobile } = storeToRefs(deviceStore);
 </script>
 
 <template>
