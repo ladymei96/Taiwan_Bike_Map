@@ -1,28 +1,37 @@
 <script setup>
 import BlockWrap from '@/components/common/BlockWrap.vue';
 import NearbyStationMap from '@/components/NearbyStationMap.vue';
+
 import CheckIcon from '@/assets/icons/Check.svg';
 import MarkerIcon from '@/assets/icons/Marker.svg';
-import { ref, reactive, watch, computed } from 'vue';
 
-// 是否移到這層在拿資料
-const props = defineProps({
-  stationInfoList: {
-    type: Array,
-    default() {
-      return [];
-    }
-  }
-});
+import { ref, reactive, watch, computed } from 'vue';
+import { getStationData, getAvailableData } from '@/api/tdxService';
+import { userLocation } from '@/store';
+
+const geoLocationStore = userLocation();
 
 const title = ref('附近站點');
 const description = ref('最近的站點資訊。');
 const singleStation = reactive({ data: {} });
+const stationInfoList = reactive({ list: [] });
 
 watch(
-  props.stationInfoList,
+  () => geoLocationStore.geolocation,
   newVal => {
-    singleStation.data = newVal[0];
+    getStationInfo(newVal);
+  },
+  { deep: true }
+);
+
+watch(
+  () => stationInfoList.list,
+  newVal => {
+    singleStation.data = newVal
+      .filter(({ isActive }) => {
+        return isActive;
+      })
+      .shift();
   },
   { deep: true }
 );
@@ -30,8 +39,29 @@ watch(
 const isStationDataReady = computed(() => {
   return Object.keys(singleStation.data).length > 0;
 });
-const updateSingleStation = val => {
-  singleStation.data = val;
+
+const getStationInfo = async params => {
+  const [stationResult, availableResult] = await Promise.all([
+    getStationData(params),
+    getAvailableData(params)
+  ]);
+  stationInfoList.list = availableResult.map(
+    (availableItem, availableIndex) => {
+      stationResult.forEach(stationItem => {
+        if (stationItem.StationID === availableItem.StationID) {
+          availableItem.StationName = stationItem.StationName;
+          availableItem.StationAddress = stationItem.StationAddress;
+          availableItem.StationPosition = stationItem.StationPosition;
+        }
+      });
+      const isActive = availableIndex === 0; // default setting: isActive
+      return { ...availableItem, isActive };
+    }
+  );
+};
+
+const updateStationStatus = val => {
+  stationInfoList.list = val;
 };
 </script>
 
@@ -41,8 +71,8 @@ const updateSingleStation = val => {
       <div class="w-2/3 bg-slate-300">
         <NearbyStationMap
           v-if="isStationDataReady"
-          :stationInfoList="stationInfoList"
-          @updateSingleStation="updateSingleStation"
+          :stationInfoList="stationInfoList.list"
+          @updateStationStatus="updateStationStatus"
         />
       </div>
       <div class="w-1/3 py-28 bg-white">

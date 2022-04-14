@@ -3,6 +3,7 @@ import L from 'leaflet';
 import { onMounted, ref } from 'vue';
 import { userLocation } from '@/store';
 import { storeToRefs } from 'pinia';
+import { accessToken } from '@/token.env.js';
 
 const props = defineProps({
   stationInfoList: {
@@ -12,7 +13,7 @@ const props = defineProps({
     }
   }
 });
-const emit = defineEmits(['updateSingleStation']);
+const emit = defineEmits(['updateStationStatus']);
 
 const geoLocationStore = userLocation();
 const {
@@ -22,8 +23,6 @@ const {
 } = storeToRefs(geoLocationStore);
 
 let map = ref(undefined);
-const accessToken =
-  'pk.eyJ1IjoibWVpY2hhbmc5NiIsImEiOiJjbDF2aXVreDUwOXhsM2ltcDdxdjVlMjh6In0.N5g5J3R0DGo7xfkuZ4DsCA';
 
 const initMap = ({ accessToken, latitude, longitude }) => {
   map = L.map('map').setView([latitude, longitude], 16);
@@ -42,6 +41,7 @@ const initMap = ({ accessToken, latitude, longitude }) => {
   return map;
 };
 const setMarker = () => {
+  // 這邊處理 icon?
   const markerGroup = props.stationInfoList.map(
     ({ StationPosition, StationName }) => {
       return L.marker([
@@ -59,12 +59,13 @@ const setMarker = () => {
 
 const markerClick = val => {
   const { lat, lng } = val.latlng;
-  const targetStation = props.stationInfoList
-    .filter(({ StationPosition: { PositionLat, PositionLon } }) => {
-      return lat === PositionLat && lng === PositionLon;
-    })
-    .shift();
-  emit('updateSingleStation', targetStation);
+  const newStationInfoList = props.stationInfoList.map(item => {
+    const isActive =
+      item.StationPosition.PositionLat === lat &&
+      item.StationPosition.PositionLon === lng;
+    return { ...item, isActive };
+  });
+  emit('updateStationStatus', newStationInfoList); // 待優化：是不是可以改成 sync?
 };
 
 onMounted(() => {

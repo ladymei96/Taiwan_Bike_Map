@@ -1,11 +1,10 @@
 import axios from 'axios';
 import jsSHA from 'jssha';
+import { appId, appKey } from '@/token.env.js';
 
 const basicURL = 'https://ptx.transportdata.tw/MOTC/v2/Bike';
 
-const generateAuthorizationHeader = () => {
-  const appId = '55f7102368fd4a128dbfa3b5140f02e4';
-  const appKey = 'LGEfSTJYQ4nIfFpfRXBttdXhmYo';
+const generateAuthorizationHeader = ({ appId, appKey }) => {
   const GMTString = new Date().toGMTString();
   const shaObj = new jsSHA('SHA-1', 'TEXT');
   shaObj.setHMACKey(appKey, 'TEXT');
@@ -26,7 +25,7 @@ export const getStationData = async ({ latitude, longitude }) => {
     params: {
       $spatialFilter: `nearby(${latitude},${longitude},500)`
     },
-    headers: generateAuthorizationHeader()
+    headers: generateAuthorizationHeader({ appId, appKey })
   });
   return data;
 };
@@ -36,7 +35,7 @@ export const getAvailableData = async ({ latitude, longitude }) => {
     params: {
       $spatialFilter: `nearby(${latitude},${longitude},500)`
     },
-    headers: generateAuthorizationHeader()
+    headers: generateAuthorizationHeader({ appId, appKey })
   });
   return data;
 };
