@@ -4,6 +4,8 @@ import NearbyStationMap from '@/components/NearbyStationMap.vue';
 
 import CheckIcon from '@/assets/icons/Check.svg';
 import MarkerIcon from '@/assets/icons/Marker.svg';
+import DefaultIcon from '@/assets/icons/Default.svg';
+import NotActIcon from '@/assets/icons/NotAct.svg';
 
 import { ref, reactive, watch, computed } from 'vue';
 import { getStationData, getAvailableData } from '@/api/tdxService';
@@ -54,7 +56,7 @@ const getStationInfo = async params => {
           availableItem.StationPosition = stationItem.StationPosition;
         }
       });
-      const isActive = availableIndex === 0; // default setting: isActive
+      const isActive = availableIndex === 0;
       return { ...availableItem, isActive };
     }
   );
@@ -68,12 +70,20 @@ const updateStationStatus = val => {
 <template>
   <BlockWrap :title="title" :description="description">
     <section class="flex">
-      <div class="w-2/3 bg-slate-300">
+      <div class="w-2/3 bg-slate-300 relative">
         <NearbyStationMap
           v-if="isStationDataReady"
           :stationInfoList="stationInfoList.list"
           @updateStationStatus="updateStationStatus"
         />
+        <div
+          class="absolute bottom-12 left-20 z-30 px-6 py-2.5 rounded-2xl flex items-center space-x-2 bg-white text-md font-bold text-gray-900"
+        >
+          <img :src="DefaultIcon" alt="open icon" />
+          <span>營業中</span>
+          <img :src="NotActIcon" alt="close icon" />
+          <span>未營業</span>
+        </div>
       </div>
       <div class="w-1/3 py-28 bg-white">
         <div class="px-15%">

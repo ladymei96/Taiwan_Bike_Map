@@ -80,6 +80,7 @@ const setCustomIcons = () => {
     notActIcon
   };
 };
+
 const setMarker = ({ defaultIcon, activeIcon, notActIcon }) => {
   if (markers) {
     map.removeLayer(markers);
