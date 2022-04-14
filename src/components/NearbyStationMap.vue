@@ -1,6 +1,10 @@
 <script setup>
+import DefaultIcon from '@/assets/icons/Default.svg';
+import ActiveIcon from '@/assets/icons/Active.svg';
+import NotActIcon from '@/assets/icons/NotAct.svg';
+
 import L from 'leaflet';
-import { onMounted, ref } from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
 import { userLocation } from '@/store';
 import { storeToRefs } from 'pinia';
 import { accessToken } from '@/token.env.js';
@@ -22,7 +26,18 @@ const {
   }
 } = storeToRefs(geoLocationStore);
 
-let map = ref(undefined);
+let map = null;
+let markers = null;
+let currentIndex = 0;
+const customIcons = reactive({ icons: {} });
+
+watch(
+  () => props.stationInfoList,
+  newVal => {
+    setMarker(customIcons.icons);
+  },
+  { deep: true }
+);
 
 const initMap = ({ accessToken, latitude, longitude }) => {
   map = L.map('map').setView([latitude, longitude], 16);
@@ -40,29 +55,62 @@ const initMap = ({ accessToken, latitude, longitude }) => {
   ).addTo(map);
   return map;
 };
-const setMarker = () => {
-  // 這邊處理 icon?
+
+const setCustomIcons = () => {
+  const CustomIcon = L.Icon.extend({
+    options: {
+      iconSize: [38, 38],
+      iconAnchor: [22, 94],
+      popupAnchor: [-3, -76]
+    }
+  });
+  const defaultIcon = new CustomIcon({ iconUrl: DefaultIcon }),
+    activeIcon = new CustomIcon({
+      iconUrl: ActiveIcon,
+      iconSize: [50, 50],
+      iconAnchor: [29, 101]
+    }),
+    notActIcon = new CustomIcon({ iconUrl: NotActIcon });
+  L.icon = options => {
+    return new L.Icon(options);
+  };
+  return {
+    defaultIcon,
+    activeIcon,
+    notActIcon
+  };
+};
+const setMarker = ({ defaultIcon, activeIcon, notActIcon }) => {
+  if (markers) {
+    map.removeLayer(markers);
+  }
   const markerGroup = props.stationInfoList.map(
-    ({ StationPosition, StationName }) => {
-      return L.marker([
-        StationPosition.PositionLat,
-        StationPosition.PositionLon
-      ])
+    ({ StationPosition, StationName, ServiceStatus, isActive }) => {
+      const icon = isActive
+        ? activeIcon
+        : ServiceStatus === 1
+        ? defaultIcon
+        : notActIcon;
+      return L.marker(
+        [StationPosition.PositionLat, StationPosition.PositionLon],
+        { icon }
+      )
         .bindPopup(StationName.Zh_tw)
         .on('click', markerClick);
     }
   );
-  const stations = L.layerGroup(markerGroup);
-  stations.addTo(map);
-  markerGroup[0].openPopup();
+  markers = L.layerGroup(markerGroup);
+  markers.addTo(map);
+  markerGroup[currentIndex].openPopup();
 };
 
 const markerClick = val => {
   const { lat, lng } = val.latlng;
-  const newStationInfoList = props.stationInfoList.map(item => {
+  const newStationInfoList = props.stationInfoList.map((item, index) => {
     const isActive =
       item.StationPosition.PositionLat === lat &&
       item.StationPosition.PositionLon === lng;
+    if (isActive) currentIndex = index;
     return { ...item, isActive };
   });
   emit('updateStationStatus', newStationInfoList); // 待優化：是不是可以改成 sync?
@@ -70,7 +118,8 @@ const markerClick = val => {
 
 onMounted(() => {
   initMap({ accessToken, latitude, longitude });
-  setMarker();
+  customIcons.icons = setCustomIcons();
+  setMarker(customIcons.icons);
 });
 </script>
 
