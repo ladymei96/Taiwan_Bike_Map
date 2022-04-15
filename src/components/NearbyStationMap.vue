@@ -60,16 +60,16 @@ const initMap = ({ accessToken, latitude, longitude }) => {
 const setCustomIcons = () => {
   const CustomIcon = L.Icon.extend({
     options: {
-      iconSize: [38, 38],
-      iconAnchor: [22, 94],
-      popupAnchor: [-3, -76]
+      iconSize: [38, 38]
+      // iconAnchor: [22, 94],
+      // popupAnchor: [-3, -76]
     }
   });
   const defaultIcon = new CustomIcon({ iconUrl: DefaultIcon }),
     activeIcon = new CustomIcon({
       iconUrl: ActiveIcon,
-      iconSize: [50, 50],
-      iconAnchor: [29, 101]
+      iconSize: [50, 50]
+      // iconAnchor: [29, 101]
     }),
     notActIcon = new CustomIcon({ iconUrl: NotActIcon });
   L.icon = options => {
