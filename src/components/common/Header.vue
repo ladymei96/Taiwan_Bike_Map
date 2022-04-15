@@ -36,7 +36,7 @@ const PC_LOGO_SIZE = reactive({
 </script>
 
 <template>
-  <header class="fixed top-0 w-full z-20">
+  <header class="fixed top-0 w-full z-40">
     <MobileLogo v-if="isMobile" />
     <div class="bg-dark01 text-white font-bold">
       <div

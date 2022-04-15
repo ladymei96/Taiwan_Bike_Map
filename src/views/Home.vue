@@ -1,5 +1,6 @@
 <script setup>
 import Carousel from '@/components/Carousel.vue';
+import TopRoute from '@/components/TopRoute.vue';
 import NearbyStation from '@/components/NearbyStation.vue';
 import TouristSpots from '@/components/TouristSpots.vue';
 
@@ -63,6 +64,7 @@ onMounted(() => {
     </div>
     <Carousel />
   </div>
+  <TopRoute />
   <NearbyStation v-if="hasGeoLocation" />
   <TouristSpots />
 </template>
