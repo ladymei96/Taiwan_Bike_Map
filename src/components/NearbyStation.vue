@@ -36,30 +36,26 @@ const isStationDataReady = computed(() => {
   return Object.keys(singleStation.data).length > 0;
 });
 
-const twoPointDistance = computed(() => {
-  const {
-    StationPosition: { PositionLon, PositionLat }
-  } = singleStation.data;
+const twoPointDistance = StationPosition => {
   const { longitude, latitude } = geoLocationStore.geolocation;
   const userPosition = {
       x: longitude,
       y: latitude
     },
     stationPosition = {
-      x: PositionLon,
-      y: PositionLat
+      x: StationPosition.PositionLon,
+      y: StationPosition.PositionLat
     };
-  const result = distance(userPosition, stationPosition, 'M');
-  return result;
-});
+  return distance(userPosition, stationPosition, 'M');
+};
 
 const getStationInfo = async params => {
   const [stationResult, availableResult] = await Promise.all([
     getStationData(params),
     getAvailableData(params)
   ]);
-  stationInfoList.list = availableResult.map(
-    (availableItem, availableIndex) => {
+  stationInfoList.list = availableResult
+    .map(availableItem => {
       stationResult.forEach(stationItem => {
         if (stationItem.StationID === availableItem.StationID) {
           availableItem.StationName = stationItem.StationName;
@@ -67,10 +63,16 @@ const getStationInfo = async params => {
           availableItem.StationPosition = stationItem.StationPosition;
         }
       });
-      const isActive = availableIndex === 0;
-      return { ...availableItem, isActive };
-    }
-  );
+      const distance = twoPointDistance(availableItem.StationPosition);
+      return { ...availableItem, distance };
+    })
+    .sort((a, b) => {
+      return a.distance - b.distance;
+    })
+    .map((item, index) => {
+      const isActive = index === 0;
+      return { ...item, isActive };
+    });
 };
 
 const updateStationStatus = val => {
@@ -123,7 +125,7 @@ onMounted(() => {
               </p>
               <p class="flex">
                 <img class="w-5 mr-1.5" :src="MarkerIcon" alt="markerIcon" />
-                <span>距離：{{ twoPointDistance }} 公尺</span>
+                <span>距離：{{ singleStation.data.distance }} 公尺</span>
               </p>
             </div>
             <div

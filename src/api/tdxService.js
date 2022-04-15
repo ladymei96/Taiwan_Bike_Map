@@ -23,7 +23,7 @@ export const getStationData = async ({ latitude, longitude }) => {
   const url = `${basicURL}/Station/NearBy`;
   const { data } = await axios.get(url, {
     params: {
-      $spatialFilter: `nearby(${latitude},${longitude},500)`
+      $spatialFilter: `nearby(${latitude},${longitude},600)`
     },
     headers: generateAuthorizationHeader({ appId, appKey })
   });
@@ -33,7 +33,7 @@ export const getAvailableData = async ({ latitude, longitude }) => {
   const url = `${basicURL}/Availability/NearBy`;
   const { data } = await axios.get(url, {
     params: {
-      $spatialFilter: `nearby(${latitude},${longitude},500)`
+      $spatialFilter: `nearby(${latitude},${longitude},600)`
     },
     headers: generateAuthorizationHeader({ appId, appKey })
   });
