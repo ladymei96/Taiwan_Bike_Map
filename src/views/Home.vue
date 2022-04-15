@@ -1,6 +1,8 @@
 <script setup>
 import Carousel from '@/components/Carousel.vue';
 import NearbyStation from '@/components/NearbyStation.vue';
+import TouristSpots from '@/components/TouristSpots.vue';
+
 import TaiwanRidingPNG from '@/assets/TaiwanRiding.png';
 import LetGo from '@/assets/Let’sGo.svg';
 import { onMounted, ref } from 'vue';
@@ -62,4 +64,5 @@ onMounted(() => {
     <Carousel />
   </div>
   <NearbyStation v-if="hasGeoLocation" />
+  <TouristSpots />
 </template>

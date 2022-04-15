@@ -21,6 +21,9 @@ module.exports = {
       },
       padding: {
         '15%': '15%'
+      },
+      spacing: {
+        '600px': '600px'
       }
     }
   },

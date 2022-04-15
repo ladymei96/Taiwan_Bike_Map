@@ -9,7 +9,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="py-32 bg-gray-600">
+  <div class="py-32 bg-gray-100">
     <div class="text-center">
       <h1 class="text-dark01 text-3.5xl font-bold mb-8">{{ title }}</h1>
       <p class="text-gray-900 text-base font-medium mb-14" v-if="description">
