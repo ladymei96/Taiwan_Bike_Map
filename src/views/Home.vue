@@ -3,10 +3,13 @@ import Carousel from '@/components/Carousel.vue';
 import NearbyStation from '@/components/NearbyStation.vue';
 import TaiwanRidingPNG from '@/assets/TaiwanRiding.png';
 import LetGo from '@/assets/Let’sGo.svg';
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import { userLocation } from '@/store';
 
+/** Store */
 const geoLocationStore = userLocation();
+
+const hasGeoLocation = ref(false);
 
 const getUserGeolocation = () => {
   if (!navigator.geolocation) {
@@ -20,9 +23,11 @@ const getUserGeolocation = () => {
     };
     geoLocationStore.geolocation = params;
     geoLocationStore.isAllow = true;
+    hasGeoLocation.value = true;
   };
   const errorHandler = e => {
     geoLocationStore.errorMsg = e.message;
+    hasGeoLocation.value = false;
     throw new Error(e.message);
   };
   navigator.geolocation.getCurrentPosition(successHandler, errorHandler);
@@ -56,5 +61,5 @@ onMounted(() => {
     </div>
     <Carousel />
   </div>
-  <NearbyStation />
+  <NearbyStation v-if="hasGeoLocation" />
 </template>

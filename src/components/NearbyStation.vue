@@ -7,24 +7,17 @@ import MarkerIcon from '@/assets/icons/Marker.svg';
 import DefaultIcon from '@/assets/icons/Default.svg';
 import NotActIcon from '@/assets/icons/NotAct.svg';
 
-import { ref, reactive, watch, computed } from 'vue';
+import { ref, reactive, watch, computed, onMounted } from 'vue';
 import { getStationData, getAvailableData } from '@/api/tdxService';
 import { userLocation } from '@/store';
-
-const geoLocationStore = userLocation();
 
 const title = ref('附近站點');
 const description = ref('最近的站點資訊。');
 const singleStation = reactive({ data: {} });
 const stationInfoList = reactive({ list: [] });
 
-watch(
-  () => geoLocationStore.geolocation,
-  newVal => {
-    getStationInfo(newVal);
-  },
-  { deep: true }
-);
+/** Store */
+const geoLocationStore = userLocation();
 
 watch(
   () => stationInfoList.list,
@@ -65,6 +58,10 @@ const getStationInfo = async params => {
 const updateStationStatus = val => {
   stationInfoList.list = val;
 };
+
+onMounted(() => {
+  getStationInfo(geoLocationStore.geolocation);
+});
 </script>
 
 <template>

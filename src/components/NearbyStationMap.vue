@@ -19,17 +19,18 @@ const props = defineProps({
 });
 const emit = defineEmits(['updateStationStatus']);
 
+let map = null;
+let markers = null;
+let currentIndex = 0;
+const customIcons = reactive({ icons: {} });
+
+/** Store */
 const geoLocationStore = userLocation();
 const {
   geolocation: {
     value: { latitude, longitude }
   }
 } = storeToRefs(geoLocationStore);
-
-let map = null;
-let markers = null;
-let currentIndex = 0;
-const customIcons = reactive({ icons: {} });
 
 watch(
   () => props.stationInfoList,
