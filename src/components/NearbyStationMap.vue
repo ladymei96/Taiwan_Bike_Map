@@ -101,6 +101,9 @@ const setMarker = ({ defaultIcon, activeIcon, notActIcon }) => {
         .on('click', markerClick);
     }
   );
+  const userMaker = L.marker([latitude, longitude]).bindPopup('目前位置');
+  markerGroup.push(userMaker);
+
   markers = L.layerGroup(markerGroup);
   markers.addTo(map);
   markerGroup[currentIndex].openPopup();

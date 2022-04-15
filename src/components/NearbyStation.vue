@@ -10,6 +10,7 @@ import NotActIcon from '@/assets/icons/NotAct.svg';
 import { ref, reactive, watch, computed, onMounted } from 'vue';
 import { getStationData, getAvailableData } from '@/api/tdxService';
 import { userLocation } from '@/store';
+import { distance } from '@/utils/distance.js';
 
 const title = ref('附近站點');
 const description = ref('最近的站點資訊。');
@@ -33,6 +34,23 @@ watch(
 
 const isStationDataReady = computed(() => {
   return Object.keys(singleStation.data).length > 0;
+});
+
+const twoPointDistance = computed(() => {
+  const {
+    StationPosition: { PositionLon, PositionLat }
+  } = singleStation.data;
+  const { longitude, latitude } = geoLocationStore.geolocation;
+  const userPosition = {
+      x: longitude,
+      y: latitude
+    },
+    stationPosition = {
+      x: PositionLon,
+      y: PositionLat
+    };
+  const result = distance(userPosition, stationPosition, 'M');
+  return result;
 });
 
 const getStationInfo = async params => {
@@ -105,8 +123,7 @@ onMounted(() => {
               </p>
               <p class="flex">
                 <img class="w-5 mr-1.5" :src="MarkerIcon" alt="markerIcon" />
-                <!-- 還沒處理 -->
-                <span>距離：12km</span>
+                <span>距離：{{ twoPointDistance }} 公尺</span>
               </p>
             </div>
             <div
