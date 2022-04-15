@@ -5,6 +5,10 @@ import { reactive } from 'vue';
 import { storeToRefs } from 'pinia';
 import { userDevice } from '@/store';
 
+/** Store */
+const deviceStore = userDevice();
+const { isMobile } = storeToRefs(deviceStore);
+
 const MENU_LIST = reactive([
   {
     path: '/',
@@ -29,8 +33,6 @@ const PC_LOGO_SIZE = reactive({
     height: 25
   }
 });
-const deviceStore = userDevice();
-const { isMobile } = storeToRefs(deviceStore);
 </script>
 
 <template>
