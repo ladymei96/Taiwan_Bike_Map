@@ -23,7 +23,8 @@ module.exports = {
         '15%': '15%'
       },
       spacing: {
-        '600px': '600px'
+        '600px': '600px',
+        '70vh': '70vh'
       },
       saturate: {
         70: '.7'

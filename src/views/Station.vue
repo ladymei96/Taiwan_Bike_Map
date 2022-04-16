@@ -1,5 +1,11 @@
-<script setup></script>
+<script setup>
+import StationSearch from '@/components/Station/StationSearch.vue';
+import NearbySpots from '@/components/common/NearbySpots.vue';
+import NearbyFood from '@/components/common/NearbyFood.vue';
+</script>
 
 <template>
-  <h1 class="text-6xl">This is Station Page</h1>
+  <StationSearch />
+  <NearbySpots></NearbySpots>
+  <NearbyFood></NearbyFood>
 </template>
