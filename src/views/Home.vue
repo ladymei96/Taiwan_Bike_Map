@@ -4,8 +4,8 @@ import TopRoute from '@/components/TopRoute.vue';
 import NearbyStation from '@/components/NearbyStation.vue';
 import TouristSpots from '@/components/TouristSpots.vue';
 
-import TaiwanRidingPNG from '@/assets/TaiwanRiding.png';
-import LetGo from '@/assets/Let’sGo.svg';
+import TaiwanRidingPNG from '@/statics/assets/TaiwanRiding.png';
+import LetGo from '@/statics/assets/Let’sGo.svg';
 import { onMounted, ref } from 'vue';
 import { userLocation } from '@/store';
 

@@ -1,6 +1,6 @@
 <script setup>
-import BikeIcon from '@/assets/Bike.svg';
-import TaiwanRiding from '@/assets/TaiwanRiding.svg';
+import BikeIcon from '@/statics/assets/Bike.svg';
+import TaiwanRiding from '@/statics/assets/TaiwanRiding.svg';
 
 const props = defineProps({
   size: {

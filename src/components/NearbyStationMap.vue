@@ -1,7 +1,7 @@
 <script setup>
-import DefaultIcon from '@/assets/icons/Default.svg';
-import ActiveIcon from '@/assets/icons/Active.svg';
-import NotActIcon from '@/assets/icons/NotAct.svg';
+import DefaultIcon from '@/statics/assets/icons/Default.svg';
+import ActiveIcon from '@/statics/assets/icons/Active.svg';
+import NotActIcon from '@/statics/assets/icons/NotAct.svg';
 
 import L from 'leaflet';
 import { onMounted, reactive, ref, watch } from 'vue';

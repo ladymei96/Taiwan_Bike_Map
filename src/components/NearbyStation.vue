@@ -2,10 +2,10 @@
 import BlockWrap from '@/components/common/BlockWrap.vue';
 import NearbyStationMap from '@/components/NearbyStationMap.vue';
 
-import CheckIcon from '@/assets/icons/Check.svg';
-import MarkerIcon from '@/assets/icons/Marker.svg';
-import DefaultIcon from '@/assets/icons/Default.svg';
-import NotActIcon from '@/assets/icons/NotAct.svg';
+import CheckIcon from '@/statics/assets/icons/Check.svg';
+import MarkerIcon from '@/statics/assets/icons/Marker.svg';
+import DefaultIcon from '@/statics/assets/icons/Default.svg';
+import NotActIcon from '@/statics/assets/icons/NotAct.svg';
 
 import { ref, reactive, watch, computed, onMounted } from 'vue';
 import { getStationData, getAvailableData } from '@/api/tdxService';

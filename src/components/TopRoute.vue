@@ -1,10 +1,10 @@
 <script setup>
 import BlockWrap from '@/components/common/BlockWrap.vue';
 
-import Tainan from '@/assets/taiwanPhoto/Tainan.jpg';
-import Keelung from '@/assets/taiwanPhoto/Keelung.jpg';
-import Hualien from '@/assets/taiwanPhoto/Hualien.jpg';
-import Taitung from '@/assets/taiwanPhoto/Taitung.jpg';
+import Tainan from '@/statics/assets/taiwanPhoto/Tainan.jpg';
+import Keelung from '@/statics/assets/taiwanPhoto/Keelung.jpg';
+import Hualien from '@/statics/assets/taiwanPhoto/Hualien.jpg';
+import Taitung from '@/statics/assets/taiwanPhoto/Taitung.jpg';
 
 import { reactive, ref } from 'vue';
 
@@ -15,28 +15,28 @@ const topRouteList = reactive([
     routeName: '七股瀉湖自行車道',
     city: '臺南市',
     queryCity: 'Tainan',
-    url: `bg-[url('src/assets/taiwanPhoto/Tainan.jpg')]`,
+    url: `bg-[url('src/statics/assets/taiwanPhoto/Tainan.jpg')]`,
     bgImage: `background-image: url(${Tainan})`
   },
   {
     routeName: '基隆市自行車道濱海支線路網',
     city: '基隆市',
     queryCity: 'Keelung',
-    url: `bg-[url('src/assets/taiwanPhoto/Keelung.jpg')]`, // :class="[item.url]"
+    url: `bg-[url('src/statics/assets/taiwanPhoto/Keelung.jpg')]`, // :class="[item.url]"
     bgImage: `background-image: url(${Keelung})`
   },
   {
     routeName: '光復糖廠自行車道',
     city: '花蓮縣',
     queryCity: 'Hualien',
-    url: `bg-[url('src/assets/taiwanPhoto/Hualien.jpg')]`,
+    url: `bg-[url('src/statics/assets/taiwanPhoto/Hualien.jpg')]`,
     bgImage: `background-image: url(${Hualien})`
   },
   {
     routeName: '三仙台自行車道',
     city: '臺東縣',
     queryCity: 'Taitung',
-    url: `bg-[url('src/assets/taiwanPhoto/Taitung.jpg')]`,
+    url: `bg-[url('src/statics/assets/taiwanPhoto/Taitung.jpg')]`,
     bgImage: `background-image: url(${Taitung})`
   }
 ]);

@@ -1,10 +1,10 @@
 <script setup>
 import BlockWrap from '@/components/common/BlockWrap.vue';
 
-import view_1 from '@/assets/taiwanPhoto/view_1.jpg';
-import view_2 from '@/assets/taiwanPhoto/view_2.jpg';
-import view_3 from '@/assets/taiwanPhoto/view_3.jpg';
-import view_4 from '@/assets/taiwanPhoto/view_4.jpg';
+import view_1 from '@/statics/assets/taiwanPhoto/view_1.jpg';
+import view_2 from '@/statics/assets/taiwanPhoto/view_2.jpg';
+import view_3 from '@/statics/assets/taiwanPhoto/view_3.jpg';
+import view_4 from '@/statics/assets/taiwanPhoto/view_4.jpg';
 import { ref } from 'vue';
 
 const title = ref('旅途中美景');
