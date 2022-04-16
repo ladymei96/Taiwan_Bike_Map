@@ -50,10 +50,18 @@ const twoPointDistance = StationPosition => {
 };
 
 const getStationInfo = async params => {
-  const [stationResult, availableResult] = await Promise.all([
-    getStationData(params),
-    getAvailableData(params)
-  ]);
+  try {
+    const [stationResult, availableResult] = await Promise.all([
+      getStationData(params),
+      getAvailableData(params)
+    ]);
+    combineData({ stationResult, availableResult });
+  } catch (error) {
+    console.log('Error', error);
+  }
+};
+
+const combineData = ({ stationResult, availableResult }) => {
   stationInfoList.list = availableResult
     .map(availableItem => {
       stationResult.forEach(stationItem => {
@@ -74,7 +82,6 @@ const getStationInfo = async params => {
       return { ...item, isActive };
     });
 };
-
 const updateStationStatus = val => {
   stationInfoList.list = val;
 };

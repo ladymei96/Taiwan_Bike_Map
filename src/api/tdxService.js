@@ -21,21 +21,29 @@ const generateAuthorizationHeader = ({ appId, appKey }) => {
 
 export const getStationData = async ({ latitude, longitude }) => {
   const url = `${basicURL}/Station/NearBy`;
-  const { data } = await axios.get(url, {
-    params: {
-      $spatialFilter: `nearby(${latitude},${longitude},600)`
-    },
-    headers: generateAuthorizationHeader({ appId, appKey })
-  });
-  return data;
+  try {
+    const { data } = await axios.get(url, {
+      params: {
+        $spatialFilter: `nearby(${latitude},${longitude},600)`
+      },
+      headers: generateAuthorizationHeader({ appId, appKey })
+    });
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.Message);
+  }
 };
 export const getAvailableData = async ({ latitude, longitude }) => {
   const url = `${basicURL}/Availability/NearBy`;
-  const { data } = await axios.get(url, {
-    params: {
-      $spatialFilter: `nearby(${latitude},${longitude},600)`
-    },
-    headers: generateAuthorizationHeader({ appId, appKey })
-  });
-  return data;
+  try {
+    const { data } = await axios.get(url, {
+      params: {
+        $spatialFilter: `nearby(${latitude},${longitude},600)`
+      },
+      headers: generateAuthorizationHeader({ appId, appKey })
+    });
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.Message);
+  }
 };
