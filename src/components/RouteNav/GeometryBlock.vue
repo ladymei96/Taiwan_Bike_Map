@@ -31,7 +31,11 @@ const changeLoadingStatus = statue => {
 </script>
 
 <template>
-  <div class="w-full h-80vh">
+  <div class="w-full h-80vh relative">
     <GeometryMap v-if="!isLoading" :roadData="roadData" />
+    <RouteContent
+      class="absolute z-30 right-2% bottom-10%"
+      :roadData="roadData"
+    />
   </div>
 </template>
