@@ -6,7 +6,10 @@ import MarkerIcon from '@/statics/assets/icons/Marker.svg';
 import DefaultIcon from '@/statics/assets/icons/Default.svg';
 import NotActIcon from '@/statics/assets/icons/NotAct.svg';
 
-import { reactive, computed, watch } from 'vue';
+import { ref, reactive, computed, watch } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 
 const props = defineProps({
   stationInfoList: {
@@ -14,6 +17,10 @@ const props = defineProps({
     default() {
       return [];
     }
+  },
+  isLoading: {
+    type: Boolean,
+    default: false
   }
 });
 const emit = defineEmits(['updateStationStatus']);
@@ -22,6 +29,10 @@ const singleStation = reactive({ data: {} });
 
 const isStationDataReady = computed(() => {
   return Object.keys(singleStation.data).length > 0;
+});
+
+const isUserLocationDisplay = computed(() => {
+  return route.path === '/';
 });
 
 watch(
@@ -35,7 +46,6 @@ watch(
   },
   { deep: true }
 );
-
 const updateStationStatus = val => {
   emit('updateStationStatus', val);
 };
@@ -45,8 +55,9 @@ const updateStationStatus = val => {
   <section class="flex">
     <div class="w-2/3 bg-slate-300 relative">
       <StationMap
-        v-if="isStationDataReady"
+        v-if="isStationDataReady && !isLoading"
         :stationInfoList="stationInfoList"
+        :isUserLocationDisplay="isUserLocationDisplay"
         @emitStationStatus="updateStationStatus"
       />
       <div

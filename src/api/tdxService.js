@@ -47,3 +47,31 @@ export const getAvailableData = async ({ latitude, longitude }) => {
     throw new Error(error.response.data.Message);
   }
 };
+export const getCityStation = async city => {
+  const url = `${basicURL}/Station/${city}`;
+  try {
+    const { data } = await axios.get(url, {
+      params: {
+        $top: 20
+      },
+      headers: generateAuthorizationHeader({ appId, appKey })
+    });
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.Message);
+  }
+};
+export const getCityAvailableData = async city => {
+  const url = `${basicURL}/Availability/${city}`;
+  try {
+    const { data } = await axios.get(url, {
+      params: {
+        $top: 20
+      },
+      headers: generateAuthorizationHeader({ appId, appKey })
+    });
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.Message);
+  }
+};

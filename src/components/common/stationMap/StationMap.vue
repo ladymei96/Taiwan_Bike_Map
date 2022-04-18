@@ -4,9 +4,8 @@ import ActiveIcon from '@/statics/assets/icons/Active.svg';
 import NotActIcon from '@/statics/assets/icons/NotAct.svg';
 
 import L from 'leaflet';
-import { onMounted, reactive, ref, watch } from 'vue';
+import { computed, onMounted, reactive, ref, watch } from 'vue';
 import { userLocation } from '@/store';
-import { storeToRefs } from 'pinia';
 import { accessToken } from '@/token.env.js';
 
 const props = defineProps({
@@ -15,6 +14,10 @@ const props = defineProps({
     default() {
       return [];
     }
+  },
+  isUserLocationDisplay: {
+    type: Boolean,
+    default: true
   }
 });
 const emit = defineEmits(['emitStationStatus']);
@@ -26,11 +29,6 @@ const customIcons = reactive({ icons: {} });
 
 /** Store */
 const geoLocationStore = userLocation();
-const {
-  geolocation: {
-    value: { latitude, longitude }
-  }
-} = storeToRefs(geoLocationStore);
 
 watch(
   () => props.stationInfoList,
@@ -40,8 +38,8 @@ watch(
   { deep: true }
 );
 
-const initMap = ({ accessToken, latitude, longitude }) => {
-  map = L.map('map').setView([latitude, longitude], 16);
+const initMap = ({ accessToken, latitude, longitude, zoom }) => {
+  map = L.map('map').setView([latitude, longitude], zoom);
   L.tileLayer(
     `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=${accessToken}`,
     {
@@ -101,8 +99,13 @@ const setMarker = ({ defaultIcon, activeIcon, notActIcon }) => {
         .on('click', markerClick);
     }
   );
-  const userMaker = L.marker([latitude, longitude]).bindPopup('目前位置');
-  markerGroup.push(userMaker);
+  if (props.isUserLocationDisplay) {
+    const userMaker = L.marker([
+      geoLocationStore.geolocation.latitude,
+      geoLocationStore.geolocation.longitude
+    ]).bindPopup('目前位置');
+    markerGroup.push(userMaker);
+  }
 
   markers = L.layerGroup(markerGroup);
   markers.addTo(map);
@@ -120,9 +123,30 @@ const markerClick = val => {
   });
   emit('emitStationStatus', newStationInfoList); // 待優化：是不是可以改成 sync?
 };
+const paramsForMap = computed(() => {
+  const [
+    {
+      StationPosition: { PositionLon, PositionLat }
+    }
+  ] = props.stationInfoList;
+
+  const latitude = props.isUserLocationDisplay
+    ? geoLocationStore.geolocation.latitude
+    : PositionLat;
+  const longitude = props.isUserLocationDisplay
+    ? geoLocationStore.geolocation.longitude
+    : PositionLon;
+  const zoom = props.isUserLocationDisplay ? 16 : 13;
+  return {
+    accessToken,
+    latitude,
+    longitude,
+    zoom
+  };
+});
 
 onMounted(() => {
-  initMap({ accessToken, latitude, longitude });
+  initMap(paramsForMap.value);
   customIcons.icons = setCustomIcons();
   setMarker(customIcons.icons);
 });

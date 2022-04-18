@@ -2,10 +2,17 @@
 import SearchIcon from '@/statics/assets/icons/Search.svg';
 import Tainan from '@/statics/assets/taiwanPhoto/Tainan.jpg';
 
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { CITY_OPTION_TABLE } from '@/statics/constants/city_config.js';
 
+const emit = defineEmits(['updateCity']);
+
 const cityOptions = reactive(CITY_OPTION_TABLE);
+const selectedCity = ref('');
+
+const changeCity = () => {
+  emit('updateCity', selectedCity.value);
+};
 </script>
 
 <template>
@@ -13,13 +20,13 @@ const cityOptions = reactive(CITY_OPTION_TABLE);
     class="w-full h-70vh bg-cover flex items-center justify-center"
     :style="`background-image: url(${Tainan})`"
   >
-    <select class="mr-2" name="city" id="city">
-      <option value="" selected disabled>請選擇縣市</option>
+    <select class="mr-2" name="city" id="city" v-model="selectedCity">
+      <option value="" disabled>請選擇縣市</option>
       <option v-for="city in cityOptions" :key="city.value" :value="city.value">
         {{ city.option }}
       </option>
     </select>
-    <button type="button">
+    <button type="button" @click="changeCity">
       <img class="w-10 h-10" :src="SearchIcon" alt="search icon" />
     </button>
   </div>
