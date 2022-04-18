@@ -1,8 +1,9 @@
 import axios from 'axios';
 import jsSHA from 'jssha';
 import { appId, appKey } from '@/token.env.js';
+import { baseCompile } from '@vue/compiler-core';
 
-const basicURL = 'https://ptx.transportdata.tw/MOTC/v2/Bike';
+const basicURL = 'https://ptx.transportdata.tw/MOTC/v2';
 
 const generateAuthorizationHeader = ({ appId, appKey }) => {
   const GMTString = new Date().toGMTString();
@@ -20,7 +21,7 @@ const generateAuthorizationHeader = ({ appId, appKey }) => {
 };
 
 export const getStationData = async ({ latitude, longitude }) => {
-  const url = `${basicURL}/Station/NearBy`;
+  const url = `${basicURL}/Bike/Station/NearBy`;
   try {
     const { data } = await axios.get(url, {
       params: {
@@ -34,7 +35,7 @@ export const getStationData = async ({ latitude, longitude }) => {
   }
 };
 export const getAvailableData = async ({ latitude, longitude }) => {
-  const url = `${basicURL}/Availability/NearBy`;
+  const url = `${basicURL}/Bike/Availability/NearBy`;
   try {
     const { data } = await axios.get(url, {
       params: {
@@ -48,7 +49,7 @@ export const getAvailableData = async ({ latitude, longitude }) => {
   }
 };
 export const getCityStation = async city => {
-  const url = `${basicURL}/Station/${city}`;
+  const url = `${basicURL}/Bike/Station/${city}`;
   try {
     const { data } = await axios.get(url, {
       params: {
@@ -62,7 +63,7 @@ export const getCityStation = async city => {
   }
 };
 export const getCityAvailableData = async city => {
-  const url = `${basicURL}/Availability/${city}`;
+  const url = `${basicURL}/Bike/Availability/${city}`;
   try {
     const { data } = await axios.get(url, {
       params: {
@@ -74,4 +75,16 @@ export const getCityAvailableData = async city => {
   } catch (error) {
     throw new Error(error.response.data.Message);
   }
+};
+export const getCyclingData = async city => {
+  const url = `${basicURL}/Cycling/Shape/${city}`;
+  try {
+    const { data } = await axios.get(url, {
+      params: {
+        $top: 30
+      },
+      headers: generateAuthorizationHeader({ appId, appKey })
+    });
+    return data;
+  } catch (error) {}
 };

@@ -17,7 +17,7 @@ const changeCity = () => {
 
 <template>
   <div
-    class="w-full h-70vh bg-cover flex items-center justify-center"
+    class="mt-16 w-full h-70vh bg-cover flex items-center justify-center"
     :style="`background-image: url(${Tainan})`"
   >
     <select class="mr-2" name="city" id="city" v-model="selectedCity">

@@ -12,6 +12,7 @@ module.exports = {
           1000: '#363636'
         },
         default: '#28C0F0',
+        content: '#6F7789',
         dark01: '#039ECF',
         alert: '#FFDE3F',
         tint: '#DCDCDC'
@@ -24,7 +25,8 @@ module.exports = {
       },
       spacing: {
         '600px': '600px',
-        '70vh': '70vh'
+        '70vh': '70vh',
+        '80vh': '80vh'
       },
       saturate: {
         70: '.7'

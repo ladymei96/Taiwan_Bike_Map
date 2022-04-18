@@ -52,7 +52,6 @@ const initMap = ({ accessToken, latitude, longitude, zoom }) => {
       accessToken
     }
   ).addTo(map);
-  return map;
 };
 
 const setCustomIcons = () => {
