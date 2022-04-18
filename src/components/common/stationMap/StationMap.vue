@@ -17,7 +17,7 @@ const props = defineProps({
     }
   }
 });
-const emit = defineEmits(['updateStationStatus']);
+const emit = defineEmits(['emitStationStatus']);
 
 let map = null;
 let markers = null;
@@ -118,7 +118,7 @@ const markerClick = val => {
     if (isActive) currentIndex = index;
     return { ...item, isActive };
   });
-  emit('updateStationStatus', newStationInfoList); // 待優化：是不是可以改成 sync?
+  emit('emitStationStatus', newStationInfoList); // 待優化：是不是可以改成 sync?
 };
 
 onMounted(() => {
