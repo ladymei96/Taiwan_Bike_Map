@@ -1,6 +1,11 @@
 <script setup>
+import carousel_1 from '@/statics/assets/banner/carousel_1.jpg';
+import carousel_2 from '@/statics/assets/banner/carousel_2.jpg';
+import carousel_3 from '@/statics/assets/banner/carousel_3.jpg';
+
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Autoplay } from 'swiper';
+
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
@@ -8,13 +13,13 @@ import { reactive } from '@vue/reactivity';
 const modules = [Pagination, Autoplay];
 const imgList = reactive([
   {
-    url: 'https://picsum.photos/id/667/1920/1600'
+    url: carousel_1
   },
   {
-    url: 'https://picsum.photos/id/1018/1920/1600'
+    url: carousel_2
   },
   {
-    url: 'https://picsum.photos/id/1050/1920/1600'
+    url: carousel_3
   }
 ]);
 </script>

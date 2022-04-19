@@ -1,7 +1,7 @@
 <script setup>
 import SearchIcon from '@/statics/assets/icons/Search.svg';
 import RoadSearch from '@/statics/assets/RoadSearch.svg';
-import Hualien from '@/statics/assets/taiwanPhoto/Hualien.jpg';
+import Banner from '@/statics/assets/banner/roadSearch_banner.jpg';
 
 import { reactive, ref } from 'vue';
 import { CITY_OPTION_CYCLING_TABLE } from '@/statics/constants/city_config.js';
@@ -42,14 +42,14 @@ const submit = () => {
 <template>
   <div
     class="mt-16 w-full h-80vh bg-cover flex flex-col items-center justify-center"
-    :style="`background-image: url(${Hualien})`"
+    :style="`background-image: url(${Banner})`"
   >
     <img class="mb-4" :src="RoadSearch" alt="roadSearch" width="328" />
     <div class="flex items-center space-x-5">
       <select
         class="py-3 w-28 rounded-lg text-center text-content"
-        name="city"
-        id="city"
+        name="road"
+        id="road"
         v-model="selectedCity"
         @change="changeCity"
       >
