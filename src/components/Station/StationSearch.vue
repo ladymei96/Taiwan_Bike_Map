@@ -19,7 +19,7 @@ const changeCity = () => {
 
 <template>
   <div
-    class="mt-16 w-full h-80vh bg-cover flex flex-col items-center justify-center"
+    class="mt-16 w-full h-80vh bg-cover bg-center flex flex-col items-center justify-center"
     :style="`background-image: url(${Banner})`"
   >
     <img class="mb-4" :src="StionSearch" alt="stionSearch" width="328" />

@@ -15,10 +15,11 @@ export default {
       });
       const classType = item[findClass] ? item[classkey] : '未分類';
       const phone = Phone ? Phone : '未提供';
+      const openTime = OpenTime ? OpenTime : '未提供';
       return {
         name: ScenicSpotName,
         description: DescriptionDetail,
-        openTime: OpenTime,
+        openTime,
         city: City,
         class: classType,
         phone,
@@ -39,11 +40,12 @@ export default {
       } = item;
       const imgUrl = Picture?.PictureUrl1 ? Picture.PictureUrl1 : null;
       const phone = Phone ? Phone : '未提供';
+      const openTime = OpenTime ? OpenTime : '未提供';
       return {
         name: RestaurantName,
         description: Description,
         address: Address,
-        openTime: OpenTime,
+        openTime,
         city: City,
         phone,
         imgUrl
