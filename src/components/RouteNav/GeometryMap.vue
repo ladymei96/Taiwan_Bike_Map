@@ -16,7 +16,9 @@ const props = defineProps({
 
 let map = null;
 let markers = null;
-const wkt = new Wkt.Wkt(); // create wkt instance
+const MARKER_MAX_COUNT = 550;
+/** create wkt instance */
+const wkt = new Wkt.Wkt();
 const geojsonFeature = wkt.read(props.roadData.Geometry).toJson();
 
 const initMap = ({ accessToken, latitude, longitude }) => {
@@ -48,8 +50,9 @@ const polyLine = () => {
   map.fitBounds(myLayer.getBounds());
 };
 const setMarker = () => {
-  const geometryLis = geojsonFeature.coordinates[0];
-  const markerGroup = geometryLis.map(item => {
+  const geometryList = [].concat(...geojsonFeature.coordinates);
+  if (geometryList.length > MARKER_MAX_COUNT) return;
+  const markerGroup = geometryList.map(item => {
     return L.marker(item.reverse());
   });
   markers = L.layerGroup(markerGroup);
