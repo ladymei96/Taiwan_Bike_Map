@@ -26,12 +26,16 @@ const resetSelectedRoad = () => {
   selectedRoad.value = '';
 };
 const submit = () => {
+  if (!selectedCity.value || !selectedRoad.value) return;
   const roadData = RoadOptions.list
     .filter(roadItem => {
       return roadItem.RouteName === selectedRoad.value;
     })
     .shift();
-  emit('emitRoadData', roadData);
+  emit('emitRoadData', {
+    selectedRoadData: roadData,
+    city: selectedCity.value
+  });
 };
 </script>
 

@@ -86,5 +86,42 @@ export const getCyclingData = async city => {
       headers: generateAuthorizationHeader({ appId, appKey })
     });
     return data;
-  } catch (error) {}
+  } catch (error) {
+    throw new Error(error.response.data.Message);
+  }
+};
+
+export const getScenicSpotData = async params => {
+  const { city, spatialFilter } = params;
+  const url = `${basicURL}/Tourism/ScenicSpot/${city}`;
+  const config = {
+    params: {
+      $top: 20
+      // $spatialFilter: spatialFilter
+    },
+    headers: generateAuthorizationHeader({ appId, appKey })
+  };
+  try {
+    const { data } = await axios.get(url, config);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.Message);
+  }
+};
+export const getRestaurantData = async params => {
+  const { city, spatialFilter } = params;
+  const url = `${basicURL}/Tourism/Restaurant/${city}`;
+  const config = {
+    params: {
+      $top: 20
+      // $spatialFilter: spatialFilter
+    },
+    headers: generateAuthorizationHeader({ appId, appKey })
+  };
+  try {
+    const { data } = await axios.get(url, config);
+    return data;
+  } catch (error) {
+    throw new Error(error.response.data.Message);
+  }
 };

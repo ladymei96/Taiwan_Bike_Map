@@ -6,15 +6,26 @@ import Arrow_prev from '@/statics/assets/icons/Arrow_prev.svg';
 import Arrow_next from '@/statics/assets/icons/Arrow_next.svg';
 import { ref } from 'vue';
 
-const title = ref('附近景點');
+const props = defineProps({
+  title: {
+    type: String,
+    default: ''
+  },
+  tourismList: {
+    type: Array,
+    default() {
+      return [];
+    }
+  }
+});
+
 const currentIndex = ref(0);
-const total = ref(3);
 
 const changeIndex = change => {
   currentIndex.value =
-    (currentIndex.value + change + total.value) % total.value;
+    (currentIndex.value + change + props.tourismList.length) %
+    props.tourismList.length;
 };
-// 只拿資料，呈現
 </script>
 
 <template>
@@ -31,14 +42,15 @@ const changeIndex = change => {
       <!-- 排版先稍微寫死 -->
       <TransitionGroup
         class="w-1/3 h-96 relative overflow-hidden"
-        tag="ul"
+        tag="div"
         name="right-in"
       >
         <Card
           class="absolute"
-          v-for="n in total"
-          :key="n"
-          v-show="currentIndex === n - 1"
+          v-for="(item, index) in tourismList"
+          :key="item.name"
+          :singleTourismData="item"
+          v-show="currentIndex === index"
         />
       </TransitionGroup>
     </main>
