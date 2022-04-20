@@ -1,5 +1,6 @@
 <script setup>
 import MarkerIcon from '@/statics/assets/icons/Marker_default.png';
+import PhoneIcon from '@/statics/assets/icons/Phone.png';
 import TimeIcon from '@/statics/assets/icons/Time_default.png';
 
 const props = defineProps({
@@ -32,7 +33,7 @@ const props = defineProps({
         {{ singleTourismData.name }}
       </h5>
       <p class="flex items-center">
-        <img class="w-5 h-5 mr-1.5" :src="MarkerIcon" alt="marker" />
+        <img class="w-4 mr-1.5" :src="MarkerIcon" alt="marker" />
         <span>{{ singleTourismData.city }}</span>
       </p>
       <p class="col-span-2 flex items-center">
@@ -42,7 +43,7 @@ const props = defineProps({
         }}</span>
       </p>
       <p class="flex items-center">
-        <img class="w-5 h-5 mr-1.5" :src="MarkerIcon" alt="marker" />
+        <img class="w-4 mr-1.5" :src="PhoneIcon" alt="marker" />
         <span>{{ singleTourismData.phone }}</span>
       </p>
     </div>

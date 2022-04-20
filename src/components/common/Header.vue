@@ -25,7 +25,7 @@ const MENU_LIST = reactive([
 ]);
 const PC_LOGO_SIZE = reactive({
   bike: {
-    width: 39,
+    width: 35,
     height: 32
   },
   riding: {

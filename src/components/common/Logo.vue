@@ -1,5 +1,5 @@
 <script setup>
-import BikeIcon from '@/statics/assets/Bike.svg';
+import BikeIcon from '@/statics/assets/Bike.png';
 import TaiwanRiding from '@/statics/assets/TaiwanRiding.svg';
 
 const props = defineProps({
@@ -15,7 +15,7 @@ const props = defineProps({
 <template>
   <router-link to="/" class="flex">
     <img
-      class="mr-2"
+      class="mr-1"
       :src="BikeIcon"
       alt="bikeIcon"
       :width="size.bike.width"

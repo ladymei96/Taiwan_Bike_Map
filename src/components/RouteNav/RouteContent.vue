@@ -1,5 +1,6 @@
 <script setup>
 import MarkerIcon from '@/statics/assets/icons/Marker.svg';
+import Direction from '@/statics/assets/icons/Direction.png';
 
 const props = defineProps({
   roadData: {
@@ -12,16 +13,16 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="bg-white p-10 w-30% rounded-2xl">
+  <div class="bg-white p-10 w-30% rounded-2xl shadow-lg shadow-gray-900">
     <h1 class="mb-6 text-default text-3xl font-bold">
       {{ roadData.RouteName }}
     </h1>
     <p class="flex mb-4">
-      <img class="w-5 mr-1.5" :src="MarkerIcon" alt="markerIcon" />
+      <img class="w-6 mr-1.5" :src="MarkerIcon" alt="markerIcon" />
       <span> 車道長度：{{ roadData.CyclingLength }} </span>
     </p>
     <p class="flex mb-4">
-      <img class="w-5 mr-1.5" :src="MarkerIcon" alt="markerIcon" />
+      <img class="w-6 h-6 mr-1.5" :src="Direction" alt="direction" />
       <span> 行車方向：{{ roadData.Direction }} </span>
     </p>
     <p class="mb-4">起始點：{{ roadData.RoadSectionStart }}</p>

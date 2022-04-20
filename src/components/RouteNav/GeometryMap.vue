@@ -52,7 +52,7 @@ const polyLine = () => {
 const setMarker = () => {
   const geometryList = [].concat(...geojsonFeature.coordinates);
   if (geometryList.length > MARKER_MAX_COUNT) return;
-  const markerGroup = geometryList.map(item => {
+  const markerGroup = geometryList.map((item, index) => {
     return L.marker(item.reverse());
   });
   markers = L.layerGroup(markerGroup);
