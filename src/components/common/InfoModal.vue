@@ -1,6 +1,7 @@
 <script setup>
 import CloseIcon from '@/statics/assets/icons/Close.png';
 import TimeIcon from '@/statics/assets/icons/Time_default.png';
+import Type from '@/statics/assets/icons/Type.png';
 
 import { infomationModal } from '@/store';
 import { computed } from 'vue';
@@ -26,19 +27,28 @@ const closeModal = () => {
       class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-white px-8 py-6 overflow-auto rounded-md"
     >
       <div class="grid grid-cols-4 gap-3 mb-4">
-        <div class="flex justify-between items-start col-span-4">
-          <button class="order-last" @click="closeModal">
-            <img :src="CloseIcon" alt="closeIcon" />
+        <div class="flex justify-between items-center col-span-4">
+          <button
+            class="order-last bg-gray-800 p-1 rounded"
+            @click="closeModal"
+          >
+            <img class="w-4" :src="CloseIcon" alt="closeIcon" />
           </button>
           <h5 class="text-3xl font-bold text-default">
             {{ singleTourismData.name }}
           </h5>
         </div>
-        <p class="col-span-3 flex leading-6">
+        <p
+          class="flex leading-6 col-span-4"
+          :class="{ 'col-span-3': singleTourismData.class }"
+        >
           <img class="w-4 h-4 mt-1 mr-1.5" :src="TimeIcon" alt="time" />
           <span> 開放時間：{{ singleTourismData.openTime }} </span>
         </p>
-        <p class="col-span-1">分類：{{ singleTourismData.class }}</p>
+        <p v-if="singleTourismData.class" class="col-span-1 flex">
+          <img class="w-5 h-5 mr-1.5" :src="Type" alt="" />
+          <span> 分類：{{ singleTourismData.class }} </span>
+        </p>
         <p class="col-span-4 text-gray-1000">
           {{ singleTourismData.description }}
         </p>

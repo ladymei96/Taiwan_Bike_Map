@@ -53,6 +53,6 @@ window.addEventListener('scroll', onScroll);
 }
 .slide-enter-active,
 .slide-leave-active {
-  transition: opacity 0.8s ease;
+  transition: opacity 0.5s ease;
 }
 </style>

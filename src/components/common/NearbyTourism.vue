@@ -21,14 +21,28 @@ const props = defineProps({
 
 const currentIndex = ref(0);
 
-const showList = computed(() => {
+const allList = computed(() => {
   if (props.tourismList.length <= 3) {
     return props.tourismList;
   }
+  const ary = [];
+  const total = props.tourismList.length;
+  let count;
+  while (total > 0 && ary.length < 3 + 4) {
+    count = Math.floor(ary.length / total);
+    for (let i = 0; i < total; i++) {
+      const id = `${count}-${props.tourismList[i].name}`;
+      ary.push({ ...props.tourismList[i], id });
+    }
+  }
+  return ary;
+});
+const showList = computed(() => {
+  if (allList.value.length <= 3) {
+    return allList.value;
+  }
   const start = currentIndex.value - 2;
-  return props.tourismList
-    .slice(start)
-    .concat(props.tourismList.slice(0, start));
+  return allList.value.slice(start).concat(allList.value.slice(0, start));
 });
 const isButtonDisable = computed(() => {
   return showList.value.length <= 3;
@@ -36,8 +50,8 @@ const isButtonDisable = computed(() => {
 
 const changeIndex = change => {
   currentIndex.value =
-    (currentIndex.value + change + props.tourismList.length) %
-    props.tourismList.length;
+    (currentIndex.value + change + showList.value.length) %
+    showList.value.length;
 };
 </script>
 
@@ -81,7 +95,7 @@ const changeIndex = change => {
             class="card__item"
             :class="{ 'NearbyTourism__card--hidden': showList.length > 3 }"
             v-for="item in showList"
-            :key="item.name"
+            :key="item.id"
             :singleTourismData="item"
           />
         </TransitionGroup>

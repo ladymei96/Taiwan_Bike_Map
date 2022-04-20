@@ -18,7 +18,6 @@ export const userLocation = defineStore('geolocation', {
   state() {
     return {
       geolocation: null,
-      isAllow: false,
       notAllowMsg: 'Geolocation is not supported by your browser',
       errorMsg: 'Unable to retrieve your location',
       spatialFilter: ''

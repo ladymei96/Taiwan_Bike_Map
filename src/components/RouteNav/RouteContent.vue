@@ -10,6 +10,13 @@ const props = defineProps({
     }
   }
 });
+
+const distanceFormat = cyclingLength => {
+  const isOverOneKilometer = cyclingLength > 1000;
+  return isOverOneKilometer
+    ? `${cyclingLength / 1000} 公里`
+    : `${cyclingLength} 公尺`;
+};
 </script>
 
 <template>
@@ -19,7 +26,7 @@ const props = defineProps({
     </h1>
     <p class="flex mb-4">
       <img class="w-6 mr-1.5" :src="MarkerIcon" alt="markerIcon" />
-      <span> 車道長度：{{ roadData.CyclingLength }} </span>
+      <span> 車道長度：{{ distanceFormat(roadData.CyclingLength) }} </span>
     </p>
     <p class="flex mb-4">
       <img class="w-6 h-6 mr-1.5" :src="Direction" alt="direction" />
