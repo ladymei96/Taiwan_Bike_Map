@@ -16,7 +16,7 @@ const updateCity = selectedCity => {
   nextTick(() => {
     refCityStation.value.getStationInfo(selectedCity);
   });
-  fetchTourismData(selectedCity);
+  fetchTourismData({ city: selectedCity });
 };
 </script>
 

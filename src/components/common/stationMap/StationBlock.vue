@@ -24,7 +24,7 @@ const props = defineProps({
     default: false
   }
 });
-const emit = defineEmits(['updateStationStatus']);
+const emit = defineEmits(['update:stationInfoList']);
 
 const singleStation = reactive({ data: {} });
 
@@ -48,7 +48,7 @@ watch(
   { deep: true }
 );
 const updateStationStatus = val => {
-  emit('updateStationStatus', val);
+  emit('update:stationInfoList', val);
 };
 </script>
 

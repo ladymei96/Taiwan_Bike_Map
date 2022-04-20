@@ -97,10 +97,12 @@ export const getScenicSpotData = async params => {
   const config = {
     params: {
       $top: 20
-      // $spatialFilter: spatialFilter
     },
     headers: generateAuthorizationHeader({ appId, appKey })
   };
+  if (spatialFilter) {
+    config.params.$spatialFilter = spatialFilter;
+  }
   try {
     const { data } = await axios.get(url, config);
     return data;
@@ -114,10 +116,12 @@ export const getRestaurantData = async params => {
   const config = {
     params: {
       $top: 20
-      // $spatialFilter: spatialFilter
     },
     headers: generateAuthorizationHeader({ appId, appKey })
   };
+  if (spatialFilter) {
+    config.params.$spatialFilter = spatialFilter;
+  }
   try {
     const { data } = await axios.get(url, config);
     return data;

@@ -60,9 +60,6 @@ const combineData = ({ stationResult, availableResult }) => {
       return { ...item, isActive };
     });
 };
-const updateStationStatus = val => {
-  stationInfoList.list = val;
-};
 
 onMounted(() => {
   getStationInfo(geoLocationStore.geolocation);
@@ -71,9 +68,6 @@ onMounted(() => {
 
 <template>
   <BlockWrap :title="title" :description="description">
-    <StationBlock
-      :stationInfoList="stationInfoList.list"
-      @updateStationStatus="updateStationStatus"
-    />
+    <StationBlock v-model:stationInfoList.sync="stationInfoList.list" />
   </BlockWrap>
 </template>

@@ -120,7 +120,7 @@ const markerClick = val => {
     if (isActive) currentIndex = index;
     return { ...item, isActive };
   });
-  emit('emitStationStatus', newStationInfoList); // 待優化：是不是可以改成 sync?
+  emit('emitStationStatus', newStationInfoList);
 };
 const paramsForMap = computed(() => {
   const [

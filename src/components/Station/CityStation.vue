@@ -35,9 +35,6 @@ const combineData = ({ stationResult, availableResult }) => {
     }
   );
 };
-const updateStationStatus = val => {
-  stationInfoList.list = val;
-};
 
 /** <script setup> are private by default
  * parent component won't be able to access anything
@@ -49,7 +46,6 @@ defineExpose({ getStationInfo });
 <template>
   <StationBlock
     :isLoading="isLoading"
-    :stationInfoList="stationInfoList.list"
-    @updateStationStatus="updateStationStatus"
+    v-model:stationInfoList.sync="stationInfoList.list"
   />
 </template>

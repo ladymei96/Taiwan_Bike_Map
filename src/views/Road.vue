@@ -13,7 +13,7 @@ const { scenicSpot, restaurant, isTourismDataReady, fetchTourismData } =
 
 const getRoadData = ({ selectedRoadData, city }) => {
   roadData.data = selectedRoadData;
-  fetchTourismData(city);
+  fetchTourismData({ city });
 };
 </script>
 
