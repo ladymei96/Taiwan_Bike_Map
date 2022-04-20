@@ -20,6 +20,9 @@ module.exports = {
       fontSize: {
         '3.5xl': ['32px', '37.5px']
       },
+      zIndex: {
+        999: '999'
+      },
       padding: {
         '15%': '15%'
       },

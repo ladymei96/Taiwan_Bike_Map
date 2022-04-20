@@ -3,6 +3,8 @@ import MarkerIcon from '@/statics/assets/icons/Marker_default.png';
 import PhoneIcon from '@/statics/assets/icons/Phone.png';
 import TimeIcon from '@/statics/assets/icons/Time_default.png';
 
+import { infomationModal } from '@/store';
+
 const props = defineProps({
   singleTourismData: {
     type: Object,
@@ -11,6 +13,13 @@ const props = defineProps({
     }
   }
 });
+/** Store */
+const infomationModalStore = infomationModal();
+
+const showInfoModal = () => {
+  infomationModalStore.singleTourismData = props.singleTourismData;
+  infomationModalStore.isInfoModalDisplay = true;
+};
 </script>
 
 <template>
@@ -50,7 +59,12 @@ const props = defineProps({
     <div
       class="card__mask absolute w-full left-0 bg-gray-500/50 rounded-2xl flex items-center justify-center"
     >
-      <button class="uppercase text-5xl text-white font-bold">See More</button>
+      <button
+        class="uppercase text-5xl text-white font-bold"
+        @click="showInfoModal"
+      >
+        See More
+      </button>
     </div>
   </div>
 </template>

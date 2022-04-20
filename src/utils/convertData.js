@@ -11,9 +11,9 @@ export default {
       } = item;
       const imgUrl = Picture?.PictureUrl1 ? Picture.PictureUrl1 : null;
       const findClass = Object.keys(item).find(key => {
-        return key.includes('class');
+        return key.includes('Class');
       });
-      const classType = item[findClass] ? item[classkey] : '未分類';
+      const classType = item[findClass] ? item[findClass] : '未分類';
       const phone = Phone ? Phone : '未提供';
       const openTime = OpenTime ? OpenTime : '未提供';
       return {

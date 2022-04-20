@@ -7,6 +7,7 @@ import { reactive } from 'vue';
 import { useTourism } from '@/composition-api';
 
 const roadData = reactive({ data: {} });
+
 const { scenicSpot, restaurant, isTourismDataReady, fetchTourismData } =
   useTourism();
 
