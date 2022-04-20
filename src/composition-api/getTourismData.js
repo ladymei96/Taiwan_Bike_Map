@@ -10,11 +10,7 @@ export function getTourismData() {
     return scenicSpot.list.length > 0 || restaurant.list.length > 0;
   });
 
-  const fetchTourismData = async ({ city, spatialFilter }) => {
-    const params = {
-      city,
-      spatialFilter: spatialFilter ? spatialFilter : ''
-    };
+  const fetchTourismData = async params => {
     try {
       const [scenicSpotResult, restaurantResult] = await Promise.all([
         getScenicSpotData(params),

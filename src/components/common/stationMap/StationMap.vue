@@ -121,6 +121,10 @@ const markerClick = val => {
     return { ...item, isActive };
   });
   emit('emitStationStatus', newStationInfoList);
+  if (!props.isUserLocationDisplay) {
+    const spatialFilter = `nearby(${lat},${lng},800)`;
+    console.log(spatialFilter);
+  }
 };
 const paramsForMap = computed(() => {
   const [
