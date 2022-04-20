@@ -19,7 +19,7 @@ const MENU_LIST = reactive([
     title: '站點資訊'
   },
   {
-    path: '/route',
+    path: '/road',
     title: '路線導覽'
   }
 ]);

@@ -1,7 +1,8 @@
 <script setup>
 import StationMap from '@/components/common/stationMap/StationMap.vue';
 
-import CheckIcon from '@/statics/assets/icons/Check.svg';
+import CheckIcon from '@/statics/assets/icons/Check.png';
+import UncheckIcon from '@/statics/assets/icons/Uncheck.png';
 import MarkerIcon from '@/statics/assets/icons/Marker.svg';
 import DefaultIcon from '@/statics/assets/icons/Default.svg';
 import NotActIcon from '@/statics/assets/icons/NotAct.svg';
@@ -83,7 +84,15 @@ const updateStationStatus = val => {
           </p>
           <div class="mb-11 flex space-x-7">
             <p class="flex">
-              <img class="w-5 mr-1.5" :src="CheckIcon" alt="checkIcon" />
+              <img
+                class="w-5 h-5 mr-1.5"
+                :src="
+                  singleStation.data.ServiceStatus === 1
+                    ? CheckIcon
+                    : UncheckIcon
+                "
+                alt="checkIcon"
+              />
               <span
                 >狀態：{{
                   singleStation.data.ServiceStatus === 1 ? '營業中' : '未營業'

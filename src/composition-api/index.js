@@ -1,7 +1,3 @@
-import { scenicSpot, restaurant, fetchTourismData } from './getTourismData.js';
+import { getTourismData } from './getTourismData.js';
 
-export const useTourismData = {
-  scenicSpot,
-  restaurant,
-  fetchTourismData
-};
+export const useTourism = getTourismData;

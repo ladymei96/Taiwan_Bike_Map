@@ -44,7 +44,7 @@ const submit = () => {
     class="mt-16 w-full h-80vh bg-cover flex flex-col items-center justify-center"
     :style="`background-image: url(${Banner})`"
   >
-    <img class="mb-4" :src="RoadSearch" alt="roadSearch" width="328" />
+    <img class="mb-4" :src="RoadSearch" alt="roadSearch" width="322" />
     <div class="flex items-center space-x-5">
       <select
         class="py-3 w-28 rounded-lg text-center text-content"
