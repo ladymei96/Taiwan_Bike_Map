@@ -70,7 +70,7 @@ const changeIndex = change => {
           />
         </button>
       </div>
-      <div class="w-full flex overflow-hidden">
+      <div v-if="showList.length" class="w-full flex overflow-hidden">
         <TransitionGroup
           class="flex w-full"
           :class="{ 'NearbyTourism__card--margin': showList.length > 3 }"
@@ -86,6 +86,12 @@ const changeIndex = change => {
           />
         </TransitionGroup>
       </div>
+      <p
+        v-else
+        class="h-80 bg-gray-300 text-white text-6xl font-bold flex items-center justify-center"
+      >
+        No Data
+      </p>
     </main>
   </BlockWrap>
 </template>

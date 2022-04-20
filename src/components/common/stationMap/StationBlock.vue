@@ -7,10 +7,9 @@ import MarkerIcon from '@/statics/assets/icons/Marker.svg';
 import DefaultIcon from '@/statics/assets/icons/Default.svg';
 import NotActIcon from '@/statics/assets/icons/NotAct.svg';
 
-import { ref, reactive, computed, watch } from 'vue';
+import { reactive, computed, watch, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
-
-const route = useRoute();
+import { userLocation } from '@/store';
 
 const props = defineProps({
   stationInfoList: {
@@ -25,6 +24,10 @@ const props = defineProps({
   }
 });
 const emit = defineEmits(['update:stationInfoList']);
+
+const route = useRoute();
+/** Store */
+const geoLocationStore = userLocation();
 
 const singleStation = reactive({ data: {} });
 
@@ -44,12 +47,20 @@ watch(
         return isActive;
       })
       .shift();
+    const {
+      StationPosition: { PositionLat, PositionLon }
+    } = singleStation.data;
+    geoLocationStore.spatialFilter = `nearby(${PositionLat},${PositionLon},1000)`;
   },
   { deep: true }
 );
 const updateStationStatus = val => {
   emit('update:stationInfoList', val);
 };
+
+onUnmounted(() => {
+  geoLocationStore.spatialFilter = '';
+});
 </script>
 
 <template>

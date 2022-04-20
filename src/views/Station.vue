@@ -3,13 +3,25 @@ import StationSearch from '@/components/Station/StationSearch.vue';
 import CityStation from '@/components/Station/CityStation.vue';
 import NearbyTourism from '@/components/common/NearbyTourism.vue';
 
-import { nextTick, ref } from 'vue';
+import { nextTick, ref, watch } from 'vue';
+import { userLocation } from '@/store';
 import { useTourism } from '@/composition-api';
 
 const city = ref('');
 const refCityStation = ref(null);
 const { scenicSpot, restaurant, isTourismDataReady, fetchTourismData } =
   useTourism();
+
+/** Store */
+const geoLocationStore = userLocation();
+
+watch(
+  () => geoLocationStore.spatialFilter,
+  newVal => {
+    if (!newVal) return;
+    fetchTourismData({ city: city.value, spatialFilter: newVal });
+  }
+);
 
 const updateCity = selectedCity => {
   city.value = selectedCity;

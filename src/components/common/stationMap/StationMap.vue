@@ -4,7 +4,7 @@ import ActiveIcon from '@/statics/assets/icons/Active.svg';
 import NotActIcon from '@/statics/assets/icons/NotAct.svg';
 
 import L from 'leaflet';
-import { computed, onMounted, reactive, ref, watch } from 'vue';
+import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
 import { userLocation } from '@/store';
 import { accessToken } from '@/token.env.js';
 
@@ -122,8 +122,8 @@ const markerClick = val => {
   });
   emit('emitStationStatus', newStationInfoList);
   if (!props.isUserLocationDisplay) {
-    const spatialFilter = `nearby(${lat},${lng},800)`;
-    console.log(spatialFilter);
+    const spatialFilter = `nearby(${lat},${lng},1000)`;
+    geoLocationStore.spatialFilter = spatialFilter;
   }
 };
 const paramsForMap = computed(() => {
@@ -152,6 +152,10 @@ onMounted(() => {
   initMap(paramsForMap.value);
   customIcons.icons = setCustomIcons();
   setMarker(customIcons.icons);
+});
+
+onUnmounted(() => {
+  geoLocationStore.spatialFilter = '';
 });
 </script>
 

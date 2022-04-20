@@ -20,7 +20,8 @@ export const userLocation = defineStore('geolocation', {
       geolocation: null,
       isAllow: false,
       notAllowMsg: 'Geolocation is not supported by your browser',
-      errorMsg: 'Unable to retrieve your location'
+      errorMsg: 'Unable to retrieve your location',
+      spatialFilter: ''
     };
   }
 });
