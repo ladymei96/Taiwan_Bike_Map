@@ -2,8 +2,8 @@
 import Logo from '@/components/common/Logo.vue';
 import MobileLogo from '@/components/Mobile/MobileLogo.vue';
 import { reactive } from 'vue';
-import { storeToRefs } from 'pinia';
 import { userDevice } from '@/store';
+import { storeToRefs } from 'pinia';
 
 /** Store */
 const deviceStore = userDevice();

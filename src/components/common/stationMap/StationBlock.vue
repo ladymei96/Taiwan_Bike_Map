@@ -64,8 +64,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <section class="flex">
-    <div class="w-2/3 bg-slate-300 relative">
+  <section class="flex flex-col md:flex-row">
+    <div class="w-full md:w-2/3 h-450px md:h-auto bg-slate-300 relative">
       <StationMap
         v-if="isStationDataReady && !isLoading"
         :stationInfoList="stationInfoList"
@@ -81,8 +81,8 @@ onUnmounted(() => {
         <span>未營業</span>
       </div>
     </div>
-    <div class="w-1/3 py-28 bg-white">
-      <div class="px-15%">
+    <div class="w-full md:w-1/3 py-12 lg:py-28 bg-white">
+      <div class="px-10% lg:px-15%">
         <p v-if="!isStationDataReady">
           Geolocation is not supported by your browser
         </p>
@@ -93,8 +93,10 @@ onUnmounted(() => {
           <p class="my-5 text-base text-gray-900 font-medium">
             地址: {{ singleStation.data.StationAddress.Zh_tw }}
           </p>
-          <div class="mb-11 flex space-x-7">
-            <p class="flex">
+          <div
+            class="mb-11 flex md:flex-col lg:flex-row space-x-7 md:space-x-0 lg:space-x-7"
+          >
+            <p class="flex mb-2 lg:mb-0">
               <img
                 class="w-5 h-5 mr-1.5"
                 :src="
@@ -111,12 +113,12 @@ onUnmounted(() => {
               >
             </p>
             <p class="flex" v-if="singleStation.data.distance">
-              <img class="w-5 mr-1.5" :src="MarkerIcon" alt="markerIcon" />
+              <img class="w-6 h-6 mr-1.5" :src="MarkerIcon" alt="markerIcon" />
               <span>距離：{{ singleStation.data.distance }} 公尺</span>
             </p>
           </div>
           <div
-            class="w-9/12 py-3 mb-7 bg-default rounded-lg text-xl text-white text-center font-bold"
+            class="w-full sm:w-10/12 md:w-full py-3 mb-7 bg-default rounded-lg text-xl text-white text-center font-bold"
             :class="{
               'bg-tint': singleStation.data.AvailableRentBikes === 0
             }"
@@ -125,7 +127,7 @@ onUnmounted(() => {
             <span>{{ singleStation.data.AvailableRentBikes }}</span>
           </div>
           <div
-            class="w-9/12 py-3 mb-7 bg-default rounded-lg text-xl text-white text-center font-bold"
+            class="w-full sm:w-10/12 md:w-full py-3 mb-7 bg-default rounded-lg text-xl text-white text-center font-bold"
             :class="{
               'bg-tint': singleStation.data.AvailableReturnBikes === 0
             }"

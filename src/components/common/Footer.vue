@@ -35,11 +35,11 @@ const imgSize = computed(() => {
 </script>
 
 <template>
-  <footer class="bg-gray-100">
+  <footer class="bg-gray-100 text-center">
     <img class="w-full" :src="Vector_PC" alt="" />
     <div class="py-14 flex flex-col items-center bg-gray-1000 text-white">
       <Logo class="mb-3" :size="imgSize" />
-      <p class="text-lg font-bold">
+      <p class="text-lg font-bold px-3">
         ©{{ new Date().getFullYear() }}, Taiwan Bike. All Rights Reserved.
       </p>
     </div>

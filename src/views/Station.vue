@@ -35,8 +35,8 @@ const updateCity = selectedCity => {
 <template>
   <StationSearch @updateCity="updateCity" />
   <CityStation ref="refCityStation" v-if="city" :city="city" />
-  <template v-if="isTourismDataReady">
+  <!-- <template v-if="isTourismDataReady">
     <NearbyTourism title="附近景點" :tourismList="scenicSpot.list" />
     <NearbyTourism title="附近美食" :tourismList="restaurant.list" />
-  </template>
+  </template> -->
 </template>

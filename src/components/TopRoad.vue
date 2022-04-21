@@ -44,14 +44,16 @@ const topRouteList = reactive([
 
 <template>
   <BlockWrap :title="title" :description="description">
-    <main class="grid gap-4 grid-cols-2 px-28">
+    <main class="grid gap-4 grid-cols-1 md:grid-cols-2 px-16 lg:px-28">
       <div
-        class="topRoute__item relative px-14 py-24 h-72 text-center text-white bg-gray-800 rounded-2xl bg-center saturate-70"
+        class="topRoute__item relative h-72 px-5 text-center flex flex-col items-center justify-center text-white bg-gray-800 rounded-2xl bg-center saturate-70"
         :style="item.bgImage"
         v-for="item in topRouteList"
         :key="item.routeName"
       >
-        <h1 class="topRoute__text mb-6 text-3xl font-bold relative z-20">
+        <h1
+          class="topRoute__text mb-3 sm:mb-6 text-3xl font-bold relative z-20"
+        >
           {{ item.routeName }}
         </h1>
         <a

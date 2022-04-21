@@ -4,7 +4,7 @@ import { reactive } from 'vue';
 
 const MOBILE_LOGO_SIZE = reactive({
   bike: {
-    width: 22,
+    width: 25,
     height: 18
   },
   riding: {

@@ -45,9 +45,11 @@ const submit = () => {
     :style="`background-image: url(${Banner})`"
   >
     <img class="mb-4" :src="RoadSearch" alt="roadSearch" width="322" />
-    <div class="flex items-center space-x-5">
+    <div
+      class="flex flex-col sm:flex-row items-center sm:space-x-5 space-y-3 sm:space-y-0"
+    >
       <select
-        class="py-3 w-28 rounded-lg text-center text-content"
+        class="py-3 w-80 sm:w-28 sm:mb-0 rounded-lg text-center text-content"
         name="road"
         id="road"
         v-model="selectedCity"
@@ -63,7 +65,7 @@ const submit = () => {
         </option>
       </select>
       <select
-        class="py-3 w-80 rounded-lg text-center text-content"
+        class="py-3 w-80 rounded-lg sm:mb-0 text-center text-content"
         name="road"
         id="road"
         v-model="selectedRoad"
