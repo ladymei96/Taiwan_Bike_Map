@@ -13,7 +13,7 @@ const infomationModalStore = infomationModal();
 const singleTourismData = computed(() => {
   return infomationModalStore.singleTourismData;
 });
-const closeModal = () => {
+const dismissModal = () => {
   infomationModalStore.isInfoModalDisplay = false;
   infomationModalStore.singleTourismData = null;
 };
@@ -22,6 +22,7 @@ const closeModal = () => {
 <template>
   <div
     class="fixed top-0 right-0 bottom-0 left-0 bg-gray-1000/50 text-content z-999"
+    @click.self="dismissModal"
   >
     <section
       class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1/2 h-1/2 bg-white px-8 py-6 overflow-auto rounded-md"
@@ -30,7 +31,7 @@ const closeModal = () => {
         <div class="flex justify-between items-center col-span-4">
           <button
             class="order-last bg-gray-800 p-1 rounded"
-            @click="closeModal"
+            @click="dismissModal"
           >
             <img class="w-4" :src="CloseIcon" alt="closeIcon" />
           </button>
