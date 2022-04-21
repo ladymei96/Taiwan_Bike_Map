@@ -4,9 +4,11 @@ import App from './App.vue';
 import router from './router';
 import './index.css';
 import 'leaflet/dist/leaflet.css';
+import eventBus from '@/plugins/eventBus.js';
 
 router.afterEach((to, from, failure) => {
   window.scrollTo({ top: 0 });
 });
-
-createApp(App).use(router).use(createPinia()).mount('#app');
+const app = createApp(App);
+app.config.globalProperties.$eventBus = eventBus;
+app.use(router).use(createPinia()).mount('#app');

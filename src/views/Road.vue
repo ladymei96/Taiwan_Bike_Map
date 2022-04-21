@@ -23,8 +23,8 @@ const getRoadData = ({ selectedRoadData, city }) => {
 <template>
   <RoadSearch @emitRoadData="getRoadData" />
   <GeometryBlock v-if="isRoadDataReady" :roadData="roadData.data" />
-  <!-- <template v-if="isTourismDataReady">
+  <template v-if="isTourismDataReady">
     <NearbyTourism title="附近景點" :tourismList="scenicSpot.list" />
     <NearbyTourism title="附近美食" :tourismList="restaurant.list" />
-  </template> -->
+  </template>
 </template>

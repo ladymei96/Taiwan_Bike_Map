@@ -53,7 +53,7 @@ export const getCityStation = async city => {
   try {
     const { data } = await axios.get(url, {
       params: {
-        $top: 20
+        $top: 30
       },
       headers: generateAuthorizationHeader({ appId, appKey })
     });
@@ -67,7 +67,7 @@ export const getCityAvailableData = async city => {
   try {
     const { data } = await axios.get(url, {
       params: {
-        $top: 20
+        $top: 30
       },
       headers: generateAuthorizationHeader({ appId, appKey })
     });

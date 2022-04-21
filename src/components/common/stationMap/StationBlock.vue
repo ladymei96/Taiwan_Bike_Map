@@ -7,9 +7,8 @@ import MarkerIcon from '@/statics/assets/icons/Marker.svg';
 import DefaultIcon from '@/statics/assets/icons/Default.svg';
 import NotActIcon from '@/statics/assets/icons/NotAct.svg';
 
-import { reactive, computed, watch, onUnmounted } from 'vue';
+import { reactive, computed, watch, onMounted, getCurrentInstance } from 'vue';
 import { useRoute } from 'vue-router';
-import { userLocation } from '@/store';
 
 const props = defineProps({
   stationInfoList: {
@@ -26,9 +25,8 @@ const props = defineProps({
 const emit = defineEmits(['update:stationInfoList']);
 
 const route = useRoute();
-/** Store */
-const geoLocationStore = userLocation();
 
+let vueInstance;
 const singleStation = reactive({ data: {} });
 
 const isStationDataReady = computed(() => {
@@ -50,7 +48,10 @@ watch(
     const {
       StationPosition: { PositionLat, PositionLon }
     } = singleStation.data;
-    geoLocationStore.spatialFilter = `nearby(${PositionLat},${PositionLon},1000)`;
+    vueInstance.$eventBus.$emit(
+      'fetchNearbyTourism',
+      `nearby(${PositionLat},${PositionLon},1000)`
+    );
   },
   { deep: true }
 );
@@ -58,8 +59,9 @@ const updateStationStatus = val => {
   emit('update:stationInfoList', val);
 };
 
-onUnmounted(() => {
-  geoLocationStore.spatialFilter = '';
+onMounted(() => {
+  const { proxy } = getCurrentInstance();
+  vueInstance = proxy;
 });
 </script>
 

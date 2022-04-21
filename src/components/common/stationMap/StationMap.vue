@@ -4,7 +4,7 @@ import ActiveIcon from '@/statics/assets/icons/Active.svg';
 import NotActIcon from '@/statics/assets/icons/NotAct.svg';
 
 import L from 'leaflet';
-import { computed, onMounted, onUnmounted, reactive, ref, watch } from 'vue';
+import { computed, onMounted, reactive, watch, getCurrentInstance } from 'vue';
 import { userLocation } from '@/store';
 import { accessToken } from '@/token.env.js';
 
@@ -22,6 +22,7 @@ const props = defineProps({
 });
 const emit = defineEmits(['emitStationStatus']);
 
+let vueInstance;
 let map = null;
 let markers = null;
 let currentIndex = 0;
@@ -123,7 +124,7 @@ const markerClick = val => {
   emit('emitStationStatus', newStationInfoList);
   if (!props.isUserLocationDisplay) {
     const spatialFilter = `nearby(${lat},${lng},1000)`;
-    geoLocationStore.spatialFilter = spatialFilter;
+    vueInstance.$eventBus.$emit('fetchNearbyTourism', spatialFilter);
   }
 };
 const paramsForMap = computed(() => {
@@ -149,13 +150,11 @@ const paramsForMap = computed(() => {
 });
 
 onMounted(() => {
+  const { proxy } = getCurrentInstance();
+  vueInstance = proxy;
   initMap(paramsForMap.value);
   customIcons.icons = setCustomIcons();
   setMarker(customIcons.icons);
-});
-
-onUnmounted(() => {
-  geoLocationStore.spatialFilter = '';
 });
 </script>
 
