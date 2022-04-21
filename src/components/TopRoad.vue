@@ -43,7 +43,7 @@ onMounted(() => {
           See More >
         </button>
         <div
-          class="topRoute__mask absolute top-0 left-0 w-full h-full rounded-2xl bg-gray-500 opacity-0 z-10"
+          class="topRoute__mask absolute top-0 left-0 w-full h-full rounded-2xl bg-gray-500 opacity-0"
         ></div>
       </div>
     </main>

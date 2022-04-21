@@ -31,7 +31,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="card bg-white rounded-2xl relative">
+  <div class="card bg-white rounded-2xl relative overflow-hidden">
     <div
       class="h-52 flex justify-center items-center bg-gray-300 rounded-t-2xl"
     >
@@ -45,23 +45,23 @@ onMounted(() => {
     </div>
     <div class="p-7 grid grid-cols-3 gap-y-2 gap-x-4 text-content">
       <h5
-        class="card__text--ellipsis col-span-2 text-dark01 text-3xl font-bold"
+        class="card__text--ellipsis col-span-3 md:col-span-2 text-dark01 text-3xl font-bold"
       >
         {{ singleTourismData.name }}
       </h5>
-      <p class="flex items-center">
+      <p class="flex items-center col-span-3 md:col-span-1">
         <img class="w-4 mr-1.5" :src="MarkerIcon" alt="marker" />
         <span>{{ singleTourismData.city }}</span>
       </p>
-      <p class="col-span-2 flex items-center">
+      <p class="col-span-3 md:col-span-2 flex items-center">
         <img class="w-4 h-4 mr-1.5" :src="TimeIcon" alt="time" />
         <span class="card__text--ellipsis">{{
           singleTourismData.openTime
         }}</span>
       </p>
-      <p class="flex items-center">
+      <p class="flex items-center col-span-3 md:col-span-1">
         <img class="w-4 mr-1.5" :src="PhoneIcon" alt="marker" />
-        <span>{{ singleTourismData.phone }}</span>
+        <span class="card__text--ellipsis">{{ singleTourismData.phone }}</span>
       </p>
     </div>
     <div

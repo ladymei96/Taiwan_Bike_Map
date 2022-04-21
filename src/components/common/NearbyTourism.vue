@@ -57,7 +57,7 @@ const changeIndex = change => {
 
 <template>
   <BlockWrap :title="title">
-    <main class="px-28">
+    <main class="px-10 sm:px-16 lg:px-28">
       <div class="flex justify-end space-x-3 mb-8">
         <button
           :class="{ 'cursor-not-allowed': isButtonDisable }"
@@ -114,11 +114,23 @@ const changeIndex = change => {
   transition: all 0.5s ease;
 }
 .NearbyTourism__card--margin {
-  margin-left: calc(-1 * 100% / 3 * 2);
+  margin-left: calc(-1 * 100% * 2);
+  @media (min-width: 1024px) {
+    margin-left: calc(-1 * 100% / 2 * 2);
+  }
+  @media (min-width: 1280px) {
+    margin-left: calc(-1 * 100% / 3 * 2);
+  }
 }
 .card__item {
-  flex: calc((100% / 3) - 20px) 0 0;
+  flex: calc(100% - 20px) 0 0;
   margin: 0px 10px;
+  @media (min-width: 1024px) {
+    flex: calc(50% - 20px) 0 0;
+  }
+  @media (min-width: 1280px) {
+    flex: calc((100% / 3) - 20px) 0 0;
+  }
 }
 .NearbyTourism__card--hidden:first-child,
 .NearbyTourism__card--hidden:last-child {
