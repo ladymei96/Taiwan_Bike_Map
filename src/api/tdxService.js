@@ -15,8 +15,7 @@ const generateAuthorizationHeader = ({ appId, appKey }) => {
 
   return {
     Authorization,
-    'X-Date': GMTString,
-    'Accept-Encoding': 'gzip'
+    'X-Date': GMTString
   };
 };
 

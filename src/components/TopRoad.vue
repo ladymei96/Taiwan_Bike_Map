@@ -1,66 +1,47 @@
 <script setup>
 import BlockWrap from '@/components/common/BlockWrap.vue';
 
-import Tainan from '@/statics/assets/taiwanPhoto/Tainan.jpg';
-import Keelung from '@/statics/assets/taiwanPhoto/Keelung.jpg';
-import Hualien from '@/statics/assets/taiwanPhoto/Hualien.jpg';
-import Taitung from '@/statics/assets/taiwanPhoto/Taitung.jpg';
+import { TOP_ROAD } from '@/statics/constants/topRoad_config.js';
+import { onMounted, ref, getCurrentInstance } from 'vue';
 
-import { reactive, ref } from 'vue';
-
+let vueInstance;
 const title = ref('熱門路線');
-const description = ref('選條路線，來個挑戰吧!');
-const topRouteList = reactive([
-  {
-    routeName: '七股瀉湖自行車道',
-    city: '臺南市',
-    queryCity: 'Tainan',
-    url: `bg-[url('src/statics/assets/taiwanPhoto/Tainan.jpg')]`,
-    bgImage: `background-image: url(${Tainan})`
-  },
-  {
-    routeName: '基隆市自行車道濱海支線路網',
-    city: '基隆市',
-    queryCity: 'Keelung',
-    url: `bg-[url('src/statics/assets/taiwanPhoto/Keelung.jpg')]`, // :class="[item.url]"
-    bgImage: `background-image: url(${Keelung})`
-  },
-  {
-    routeName: '光復糖廠自行車道',
-    city: '花蓮縣',
-    queryCity: 'Hualien',
-    url: `bg-[url('src/statics/assets/taiwanPhoto/Hualien.jpg')]`,
-    bgImage: `background-image: url(${Hualien})`
-  },
-  {
-    routeName: '三仙台自行車道',
-    city: '臺東縣',
-    queryCity: 'Taitung',
-    url: `bg-[url('src/statics/assets/taiwanPhoto/Taitung.jpg')]`,
-    bgImage: `background-image: url(${Taitung})`
-  }
-]);
+const description = ref('四大精選路線，推薦給你。');
+
+const showModal = item => {
+  const params = {
+    modalName: 'RoadInfoModal',
+    options: item
+  };
+  vueInstance.$eventBus.$emit('toggleModal', params);
+};
+
+onMounted(() => {
+  const { proxy } = getCurrentInstance();
+  vueInstance = proxy;
+});
 </script>
 
 <template>
   <BlockWrap :title="title" :description="description">
     <main class="grid gap-4 grid-cols-1 md:grid-cols-2 px-16 lg:px-28">
       <div
-        class="topRoute__item relative h-72 px-5 text-center flex flex-col items-center justify-center text-white bg-gray-800 rounded-2xl bg-center saturate-70"
-        :style="item.bgImage"
-        v-for="item in topRouteList"
-        :key="item.routeName"
+        class="topRoute__item relative h-72 px-5 text-center flex flex-col items-center justify-center text-white bg-gray-800 rounded-2xl bg-cover bg-center saturate-70"
+        :style="item.Style"
+        v-for="item in TOP_ROAD"
+        :key="item.RouteName"
       >
         <h1
           class="topRoute__text mb-3 sm:mb-6 text-3xl font-bold relative z-20"
         >
-          {{ item.routeName }}
+          {{ item.RouteName }}
         </h1>
-        <a
+        <button
           class="topRoute__text text-3xl font-bold opacity-0 relative z-20"
-          href="javascript:;"
-          >See More ></a
+          @click="showModal(item)"
         >
+          See More >
+        </button>
         <div
           class="topRoute__mask absolute top-0 left-0 w-full h-full rounded-2xl bg-gray-500 opacity-0 z-10"
         ></div>
@@ -71,7 +52,7 @@ const topRouteList = reactive([
 <style lang="scss" scoped>
 .topRoute__item {
   &:hover {
-    a {
+    button {
       opacity: 1;
     }
     .topRoute__mask {

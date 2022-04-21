@@ -2,6 +2,8 @@
 import MarkerIcon from '@/statics/assets/icons/Marker.svg';
 import Direction from '@/statics/assets/icons/Direction.png';
 
+import { onMounted, getCurrentInstance } from 'vue';
+
 const props = defineProps({
   roadData: {
     type: Object,
@@ -11,12 +13,28 @@ const props = defineProps({
   }
 });
 
+let vueInstance;
+
 const distanceFormat = cyclingLength => {
+  if (!cyclingLength) return '未提供';
   const isOverOneKilometer = cyclingLength > 1000;
   return isOverOneKilometer
     ? `${cyclingLength / 1000} 公里`
     : `${cyclingLength} 公尺`;
 };
+
+const showModal = () => {
+  const params = {
+    modalName: 'RoadInfoModal',
+    options: props.roadData
+  };
+  vueInstance.$eventBus.$emit('toggleModal', params);
+};
+
+onMounted(() => {
+  const { proxy } = getCurrentInstance();
+  vueInstance = proxy;
+});
 </script>
 
 <template>
@@ -37,7 +55,8 @@ const distanceFormat = cyclingLength => {
     <p class="mb-4">起始點：{{ roadData.RoadSectionStart }}</p>
     <p class="mb-4">終點：{{ roadData.RoadSectionEnd }}</p>
     <button
-      class="w-full py-2 bg-default hover:bg-dark01 rounded-lg text-white text-xl text-center font-bold"
+      class="w-full py-2 bg-default hover:bg-dark01 rounded-lg text-white text-xl text-center font-bold uppercase"
+      @click="showModal"
     >
       see more
     </button>

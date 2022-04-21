@@ -3,7 +3,7 @@ import MarkerIcon from '@/statics/assets/icons/Marker_default.png';
 import PhoneIcon from '@/statics/assets/icons/Phone.png';
 import TimeIcon from '@/statics/assets/icons/Time_default.png';
 
-import { infomationModal } from '@/store';
+import { onMounted, getCurrentInstance } from 'vue';
 
 const props = defineProps({
   singleTourismData: {
@@ -13,13 +13,21 @@ const props = defineProps({
     }
   }
 });
-/** Store */
-const infomationModalStore = infomationModal();
+
+let vueInstance;
 
 const showInfoModal = () => {
-  infomationModalStore.singleTourismData = props.singleTourismData;
-  infomationModalStore.isInfoModalDisplay = true;
+  const params = {
+    modalName: 'TourismInfoModal',
+    options: props.singleTourismData
+  };
+  vueInstance.$eventBus.$emit('toggleModal', params);
 };
+
+onMounted(() => {
+  const { proxy } = getCurrentInstance();
+  vueInstance = proxy;
+});
 </script>
 
 <template>

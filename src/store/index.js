@@ -23,11 +23,3 @@ export const userLocation = defineStore('geolocation', {
     };
   }
 });
-export const infomationModal = defineStore('infomation', {
-  state() {
-    return {
-      isInfoModalDisplay: false,
-      singleTourismData: null
-    };
-  }
-});
