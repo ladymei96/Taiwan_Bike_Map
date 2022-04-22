@@ -2,6 +2,7 @@
 import Carousel from '@/components/Carousel.vue';
 import TopRoad from '@/components/TopRoad.vue';
 import NearbyStation from '@/components/NearbyStation.vue';
+import NearbyStationWithoutLocation from '@/components/NearbyStationWithoutLocation.vue';
 import TouristSpots from '@/components/TouristSpots.vue';
 
 import TaiwanRidingPNG from '@/statics/assets/TaiwanRiding.png';
@@ -25,13 +26,12 @@ const getUserGeolocation = () => {
       longitude // 經度
     };
     geoLocationStore.geolocation = params;
-    geoLocationStore.isAllow = true;
     hasGeoLocation.value = true;
   };
   const errorHandler = e => {
     geoLocationStore.errorMsg = e.message;
     hasGeoLocation.value = false;
-    throw new Error(e.message);
+    console.log(e.message);
   };
   navigator.geolocation.getCurrentPosition(successHandler, errorHandler);
 };
@@ -63,5 +63,6 @@ onMounted(() => {
   </div>
   <TopRoad />
   <NearbyStation v-if="hasGeoLocation" />
+  <NearbyStationWithoutLocation v-else :msg="geoLocationStore.notAllowMsg" />
   <TouristSpots />
 </template>

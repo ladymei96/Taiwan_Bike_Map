@@ -85,9 +85,7 @@ onMounted(() => {
     </div>
     <div class="w-full md:w-1/3 py-12 lg:py-28 bg-white">
       <div class="px-10% lg:px-15%">
-        <p v-if="!isStationDataReady">
-          Geolocation is not supported by your browser
-        </p>
+        <p v-if="!isStationDataReady">Unable to retrieve your location</p>
         <div v-else>
           <h1 class="text-3xl text-default font-bold">
             {{ singleStation.data.StationName.Zh_tw }}

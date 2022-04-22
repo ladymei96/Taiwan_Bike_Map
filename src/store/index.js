@@ -7,19 +7,14 @@ export const userDevice = defineStore('device', {
     };
   },
   getters: {},
-  actions: {
-    // 除非有要做一些操作，在用 actions
-    // changeDevice(val) {
-    //   this.isMobile = val;
-    // }
-  }
+  actions: {}
 });
 export const userLocation = defineStore('geolocation', {
   state() {
     return {
       geolocation: null,
-      notAllowMsg: 'Geolocation is not supported by your browser',
-      errorMsg: 'Unable to retrieve your location'
+      notAllowMsg: 'Unable to retrieve your location',
+      errorMsg: 'Geolocation is not supported by your browser'
     };
   }
 });
