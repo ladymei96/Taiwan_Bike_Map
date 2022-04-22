@@ -1,0 +1,33 @@
+$tailwind_sm: '(min-width:640px)';
+$tailwind_md: '(min-width:768px)';
+$tailwind_lg: '(min-width:1024px)';
+$tailwind_xl: '(min-width:1280px)';
+$tailwind_2xl: '(min-width:1536px)';
+
+@mixin screen($size) {
+  @if $size == tailwind_sm {
+    @media only screen and #{$tailwind_sm} {
+      @content;
+    }
+  } @else if $size == tailwind_md {
+    @media only screen and #{$tailwind_md} {
+      @content;
+    }
+  } @else if $size == tailwind_lg {
+    @media only screen and #{$tailwind_lg} {
+      @content;
+    }
+  } @else if $size == tailwind_xl {
+    @media only screen and #{$tailwind_xl} {
+      @content;
+    }
+  } @else if $size == tailwind_2xl {
+    @media only screen and #{$tailwind_2xl} {
+      @content;
+    }
+  } @else {
+    @media only screen and #{$size} {
+      @content;
+    }
+  }
+}

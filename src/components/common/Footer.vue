@@ -1,8 +1,8 @@
 <script setup>
 import Logo from '@/components/common/Logo.vue';
 
-import Vector_PC from '@/statics/assets/icons/Vector_PC.svg';
-import Vector_mobile from '@/statics/assets/icons/Vector_mobile.svg';
+import Bike_Vector_PC from '@/statics/assets/icons/Vector_PC.svg';
+import Bike_Vector_mobile from '@/statics/assets/icons/Vector_mobile.svg';
 import { computed, reactive } from 'vue';
 import { userDevice } from '@/store';
 
@@ -29,14 +29,21 @@ const MOBILE_LOGO_SIZE = reactive({
     height: 18.61
   }
 });
+const isMobile = computed(() => {
+  return deviceStore.isMobile;
+});
 const imgSize = computed(() => {
-  return deviceStore.isMobile ? MOBILE_LOGO_SIZE : PC_LOGO_SIZE;
+  return isMobile.value ? MOBILE_LOGO_SIZE : PC_LOGO_SIZE;
 });
 </script>
 
 <template>
   <footer class="bg-gray-100 text-center">
-    <img class="w-full" :src="Vector_PC" alt="" />
+    <img
+      class="w-full -mb-1"
+      :src="isMobile ? Bike_Vector_mobile : Bike_Vector_PC"
+      alt="bikeVector"
+    />
     <div class="py-14 flex flex-col items-center bg-gray-1000 text-white">
       <Logo class="mb-3" :size="imgSize" />
       <p class="text-lg font-bold px-3">

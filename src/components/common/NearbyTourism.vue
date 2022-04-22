@@ -110,25 +110,27 @@ const changeIndex = change => {
   </BlockWrap>
 </template>
 <style lang="scss" scoped>
+@import 'src/statics/style/mobile.scss';
+
 .list-move {
   transition: all 0.5s ease;
 }
 .NearbyTourism__card--margin {
   margin-left: calc(-1 * 100% * 2);
-  @media (min-width: 1024px) {
+  @include screen('tailwind_lg') {
     margin-left: calc(-1 * 100% / 2 * 2);
   }
-  @media (min-width: 1280px) {
+  @include screen('tailwind_xl') {
     margin-left: calc(-1 * 100% / 3 * 2);
   }
 }
 .card__item {
   flex: calc(100% - 20px) 0 0;
   margin: 0px 10px;
-  @media (min-width: 1024px) {
+  @include screen('tailwind_lg') {
     flex: calc(50% - 20px) 0 0;
   }
-  @media (min-width: 1280px) {
+  @include screen('tailwind_xl') {
     flex: calc((100% / 3) - 20px) 0 0;
   }
 }
