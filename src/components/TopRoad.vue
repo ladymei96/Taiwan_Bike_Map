@@ -1,8 +1,8 @@
 <script setup>
 import BlockWrap from '@/components/common/BlockWrap.vue';
 
-import { TOP_ROAD } from '@/statics/constants/topRoad_config.js';
 import { onMounted, ref, getCurrentInstance } from 'vue';
+import { TOP_ROAD } from '@/statics/constants/topRoad_config.js';
 
 let vueInstance;
 const title = ref('熱門路線');

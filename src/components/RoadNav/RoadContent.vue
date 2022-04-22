@@ -50,10 +50,18 @@ onMounted(() => {
     </p>
     <p class="flex mb-4">
       <img class="w-6 h-6 mr-1.5" :src="Direction" alt="direction" />
-      <span> 行車方向：{{ roadData.Direction }} </span>
+      <span>
+        行車方向：{{ roadData.Direction ? roadData.Direction : '未提供' }}
+      </span>
     </p>
-    <p class="mb-4">起始點：{{ roadData.RoadSectionStart }}</p>
-    <p class="mb-4">終點：{{ roadData.RoadSectionEnd }}</p>
+    <p class="mb-4">
+      起始點：{{
+        roadData.RoadSectionStart ? roadData.RoadSectionStart : '未提供'
+      }}
+    </p>
+    <p class="mb-4">
+      終點：{{ roadData.RoadSectionEnd ? roadData.RoadSectionEnd : '未提供' }}
+    </p>
     <button
       class="w-full py-2 bg-default hover:bg-dark01 rounded-lg text-white text-xl text-center font-bold uppercase"
       @click="showModal"

@@ -1,6 +1,5 @@
 <script setup>
 import StationMap from '@/components/common/stationMap/StationMap.vue';
-
 import CheckIcon from '@/statics/assets/icons/Check.png';
 import UncheckIcon from '@/statics/assets/icons/Uncheck.png';
 import MarkerIcon from '@/statics/assets/icons/Marker.svg';

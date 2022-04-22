@@ -1,8 +1,8 @@
 <script setup>
 import Logo from '@/components/common/Logo.vue';
-
 import Bike_Vector_PC from '@/statics/assets/icons/Vector_PC.svg';
 import Bike_Vector_mobile from '@/statics/assets/icons/Vector_mobile.svg';
+
 import { computed, reactive } from 'vue';
 import { userDevice } from '@/store';
 

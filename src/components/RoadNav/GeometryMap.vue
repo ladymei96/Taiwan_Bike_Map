@@ -1,9 +1,10 @@
 <script setup>
-import L from 'leaflet';
-import Wkt from 'wicket';
+import markerIcon from '@/statics/assets/icons/CustomMarker.png';
 
 import { onMounted } from 'vue';
 import { accessToken } from '@/token.env.js';
+import L from 'leaflet';
+import Wkt from 'wicket';
 
 const props = defineProps({
   roadData: {
@@ -16,10 +17,15 @@ const props = defineProps({
 
 let map = null;
 let markers = null;
-const MARKER_MAX_COUNT = 550;
+const MARKER_MAX_COUNT = 300;
 /** create wkt instance */
 const wkt = new Wkt.Wkt();
 const geojsonFeature = wkt.read(props.roadData.Geometry).toJson();
+
+const customIcon = L.icon({
+  iconUrl: markerIcon,
+  iconSize: [22, 26]
+});
 
 const initMap = ({ accessToken, latitude, longitude }) => {
   map = L.map('geoMap').setView([longitude, latitude], 17);
@@ -53,7 +59,7 @@ const setMarker = () => {
   const geometryList = [].concat(...geojsonFeature.coordinates);
   if (geometryList.length > MARKER_MAX_COUNT) return;
   const markerGroup = geometryList.map((item, index) => {
-    return L.marker(item.reverse());
+    return L.marker(item.reverse(), { icon: customIcon });
   });
   markers = L.layerGroup(markerGroup);
   markers.addTo(map);

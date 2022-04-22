@@ -49,7 +49,7 @@ const submit = () => {
       class="flex flex-col sm:flex-row items-center sm:space-x-5 space-y-3 sm:space-y-0"
     >
       <select
-        class="py-3 w-80 sm:w-28 sm:mb-0 rounded-lg text-center text-content"
+        class="py-3 w-80 sm:w-28 sm:mb-0 rounded-lg text-center text-content outline-0"
         name="road"
         id="road"
         v-model="selectedCity"
@@ -65,7 +65,7 @@ const submit = () => {
         </option>
       </select>
       <select
-        class="py-3 w-80 rounded-lg sm:mb-0 text-center text-content"
+        class="py-3 w-80 sm:mb-0 rounded-lg text-center text-content outline-0"
         name="road"
         id="road"
         v-model="selectedRoad"

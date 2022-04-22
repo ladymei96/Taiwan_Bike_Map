@@ -3,7 +3,6 @@ import CloseIcon from '@/statics/assets/icons/Close.png';
 import TimeIcon from '@/statics/assets/icons/Time_default.png';
 import PhoneIcon from '@/statics/assets/icons/Phone.png';
 import TypeIcon from '@/statics/assets/icons/Type.png';
-
 import ModalBlock from '@/components/Modal/ModalBlock.vue';
 
 const props = defineProps({
@@ -55,7 +54,7 @@ const dismissModal = () => {
           <img class="w-5 h-5 mr-1.5" :src="PhoneIcon" alt="" />
           <span> 聯絡資訊：{{ options.phone }} </span>
         </p>
-        <p class="col-span-4 md:col-span-2 text-gray-1000">
+        <p class="col-span-4 md:col-span-2 text-gray-1000 indent-8">
           {{ options.description }}
         </p>
         <div

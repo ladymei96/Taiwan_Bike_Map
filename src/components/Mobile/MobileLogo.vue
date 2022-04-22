@@ -1,5 +1,6 @@
 <script setup>
 import Logo from '@/components/common/Logo.vue';
+
 import { reactive } from 'vue';
 
 const MOBILE_LOGO_SIZE = reactive({

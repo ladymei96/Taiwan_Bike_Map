@@ -1,9 +1,9 @@
 <script setup>
 import BlockWrap from '@/components/common/BlockWrap.vue';
 import Card from '@/components/common/Card.vue';
-
 import Arrow_prev from '@/statics/assets/icons/Arrow_prev.svg';
 import Arrow_next from '@/statics/assets/icons/Arrow_next.svg';
+
 import { computed, ref } from 'vue';
 
 const props = defineProps({

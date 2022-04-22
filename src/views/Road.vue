@@ -1,6 +1,6 @@
 <script setup>
-import RoadSearch from '@/components/RouteNav/RoadSearch.vue';
-import GeometryBlock from '@/components/RouteNav/GeometryBlock.vue';
+import RoadSearch from '@/components/RoadNav/RoadSearch.vue';
+import GeometryBlock from '@/components/RoadNav/GeometryBlock.vue';
 import NearbyTourism from '@/components/common/NearbyTourism.vue';
 
 import { computed, reactive } from 'vue';

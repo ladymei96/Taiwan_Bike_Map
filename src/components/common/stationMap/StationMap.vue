@@ -2,11 +2,12 @@
 import DefaultIcon from '@/statics/assets/icons/Default.svg';
 import ActiveIcon from '@/statics/assets/icons/Active.svg';
 import NotActIcon from '@/statics/assets/icons/NotAct.svg';
+import userMarkerIcon from '@/statics/assets/icons/user.png';
 
-import L from 'leaflet';
 import { computed, onMounted, reactive, watch, getCurrentInstance } from 'vue';
 import { userLocation } from '@/store';
 import { accessToken } from '@/token.env.js';
+import L from 'leaflet';
 
 const props = defineProps({
   stationInfoList: {
@@ -59,28 +60,27 @@ const setCustomIcons = () => {
   const CustomIcon = L.Icon.extend({
     options: {
       iconSize: [38, 38]
-      // iconAnchor: [22, 94],
-      // popupAnchor: [-3, -76]
     }
   });
   const defaultIcon = new CustomIcon({ iconUrl: DefaultIcon }),
     activeIcon = new CustomIcon({
       iconUrl: ActiveIcon,
       iconSize: [50, 50]
-      // iconAnchor: [29, 101]
     }),
-    notActIcon = new CustomIcon({ iconUrl: NotActIcon });
+    notActIcon = new CustomIcon({ iconUrl: NotActIcon }),
+    userIcon = new CustomIcon({ iconUrl: userMarkerIcon });
   L.icon = options => {
     return new L.Icon(options);
   };
   return {
     defaultIcon,
     activeIcon,
-    notActIcon
+    notActIcon,
+    userIcon
   };
 };
 
-const setMarker = ({ defaultIcon, activeIcon, notActIcon }) => {
+const setMarker = ({ defaultIcon, activeIcon, notActIcon, userIcon }) => {
   if (markers) {
     map.removeLayer(markers);
   }
@@ -100,10 +100,13 @@ const setMarker = ({ defaultIcon, activeIcon, notActIcon }) => {
     }
   );
   if (props.isUserLocationDisplay) {
-    const userMaker = L.marker([
-      geoLocationStore.geolocation.latitude,
-      geoLocationStore.geolocation.longitude
-    ]).bindPopup('目前位置');
+    const userMaker = L.marker(
+      [
+        geoLocationStore.geolocation.latitude,
+        geoLocationStore.geolocation.longitude
+      ],
+      { icon: userIcon }
+    ).bindPopup('目前位置');
     markerGroup.push(userMaker);
   }
 

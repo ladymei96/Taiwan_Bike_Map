@@ -1,6 +1,7 @@
 <script setup>
 import Logo from '@/components/common/Logo.vue';
 import MobileLogo from '@/components/Mobile/MobileLogo.vue';
+
 import { reactive } from 'vue';
 import { userDevice } from '@/store';
 import { storeToRefs } from 'pinia';

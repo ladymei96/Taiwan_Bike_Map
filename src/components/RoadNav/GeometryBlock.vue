@@ -1,6 +1,7 @@
 <script setup>
-import GeometryMap from '@/components/RouteNav/GeometryMap.vue';
-import RouteContent from '@/components/RouteNav/RouteContent.vue';
+import GeometryMap from '@/components/RoadNav/GeometryMap.vue';
+import RoadContent from '@/components/RoadNav/RoadContent.vue';
+
 import { nextTick, ref, watch } from 'vue';
 
 const props = defineProps({
@@ -33,7 +34,7 @@ const changeLoadingStatus = statue => {
 <template>
   <div class="w-full relative">
     <GeometryMap class="h-80vh" v-if="!isLoading" :roadData="roadData" />
-    <RouteContent
+    <RoadContent
       class="md:absolute md:z-30 md:right-2% md:bottom-10%"
       :roadData="roadData"
     />

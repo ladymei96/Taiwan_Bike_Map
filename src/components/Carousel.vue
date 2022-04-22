@@ -5,11 +5,11 @@ import carousel_3 from '@/statics/assets/banner/carousel_3.jpg';
 
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Pagination, Autoplay } from 'swiper';
-
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import { reactive } from '@vue/reactivity';
+
 const modules = [Pagination, Autoplay];
 const imgList = reactive([
   {
