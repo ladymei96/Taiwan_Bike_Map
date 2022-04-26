@@ -17,7 +17,10 @@ const RoadOptions = reactive({ list: [] });
 const changeCity = async () => {
   resetSelectedRoad();
   try {
-    RoadOptions.list = await getCyclingData(selectedCity.value);
+    const res = await getCyclingData(selectedCity.value);
+    RoadOptions.list = res.map((item, index) => {
+      return { ...item, id: `${item.RouteName}-${index}` };
+    });
   } catch (error) {
     console.log('Error', error);
   }
@@ -74,7 +77,7 @@ const submit = () => {
         <option
           class="text-left"
           v-for="road in RoadOptions.list"
-          :key="road.RouteName"
+          :key="road.id"
           :value="road.RouteName"
         >
           {{ road.RouteName }}

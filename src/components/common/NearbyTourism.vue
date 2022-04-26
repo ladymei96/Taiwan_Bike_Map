@@ -31,7 +31,7 @@ const allList = computed(() => {
   while (total > 0 && ary.length < 3 + 4) {
     count = Math.floor(ary.length / total);
     for (let i = 0; i < total; i++) {
-      const id = `${count}-${props.tourismList[i].name}`;
+      const id = `${count}-${props.tourismList[i].name}-${props.tourismList[i].openTime}`;
       ary.push({ ...props.tourismList[i], id });
     }
   }
