@@ -12,10 +12,11 @@ cd dist
 # 如果你要部署到自定义域名
 # echo 'www.example.com' > CNAME
 
-git init
-git checkout -b main
+# git init
+# git checkout -b main
+git checkout main
 git add -A
-git commit -m 'deploy'
+git commit -m 'build(dist): update bundle'
 
 # 如果你要部署在 https://<USERNAME>.github.io
 # git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
