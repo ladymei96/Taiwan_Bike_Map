@@ -53,10 +53,11 @@ const submit = () => {
     >
       <select
         class="py-3 w-80 sm:w-28 sm:mb-0 rounded-lg text-center text-content outline-0"
-        name="road"
-        id="road"
+        name="city"
+        id="city"
         v-model="selectedCity"
         @change="changeCity"
+        data-test="city"
       >
         <option value="" disabled>請選擇縣市</option>
         <option
@@ -72,6 +73,7 @@ const submit = () => {
         name="road"
         id="road"
         v-model="selectedRoad"
+        data-test="road"
       >
         <option value="" disabled>路線選擇</option>
         <option
@@ -83,7 +85,7 @@ const submit = () => {
           {{ road.RouteName }}
         </option>
       </select>
-      <button type="button" @click="submit">
+      <button type="button" @click="submit" data-test="submit">
         <img class="w-10 h-10" :src="SearchIcon" alt="search icon" />
       </button>
     </div>

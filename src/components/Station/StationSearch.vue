@@ -29,6 +29,7 @@ const changeCity = () => {
         name="city"
         id="city"
         v-model="selectedCity"
+        data-test="city"
       >
         <option value="" disabled>請選擇縣市</option>
         <option
@@ -39,7 +40,7 @@ const changeCity = () => {
           {{ city.option }}
         </option>
       </select>
-      <button type="button" @click="changeCity">
+      <button type="button" @click="changeCity" data-test="submit">
         <img class="w-10 h-10" :src="SearchIcon" alt="search icon" />
       </button>
     </div>
