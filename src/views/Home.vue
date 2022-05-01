@@ -31,7 +31,14 @@ const getUserGeolocation = () => {
     hasGeoLocation.value = false;
     console.log(e.message);
   };
-  navigator.geolocation.getCurrentPosition(successHandler, errorHandler);
+  const options = {
+    enableHighAccuracy: true
+  };
+  navigator.geolocation.getCurrentPosition(
+    successHandler,
+    errorHandler,
+    options
+  );
 };
 onMounted(() => {
   getUserGeolocation();
