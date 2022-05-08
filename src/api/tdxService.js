@@ -1,7 +1,6 @@
 import axios from 'axios';
 import jsSHA from 'jssha';
 import { appId, appKey } from '@/token.env.js';
-import { baseCompile } from '@vue/compiler-core';
 
 const basicURL = 'https://ptx.transportdata.tw/MOTC/v2';
 
