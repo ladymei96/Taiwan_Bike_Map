@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { setActivePinia, createPinia } from 'pinia';
-import { userDevice, userLocation } from './index.js';
+import { userDevice, userLocation } from '@/store';
 
 describe('store', () => {
   beforeEach(() => {
