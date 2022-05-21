@@ -1,7 +1,8 @@
 import { describe, it, expect, vi } from 'vitest';
 import { mount } from '@vue/test-utils';
 import RoadSearch from 'src/components/RoadNav/RoadSearch.vue';
-import tdxService from '../../src/api/__mocks__/tdxService';
+import * as tdxService from '../../src/api/tdxService.js';
+import mockTdxService from '../../src/api/__mocks__/tdxService';
 const mockRoadData = [
   {
     RouteName: '北寧路自行車道',
@@ -133,11 +134,21 @@ describe('RoadSearch', () => {
     await wrapper.get('[data-test="city"]').setValue(city);
     expect(wrapper.vm.selectedCity).toBe(city);
   });
-  it('fetch Road API data', async () => {
+  it('fetch Road API data in component', async () => {
     const spy = vi
       .spyOn(tdxService, 'getCyclingData')
+      .mockImplementation(() => Promise.resolve(mockRoadData));
+    await wrapper.vm.changeCity();
+    const result = mockRoadData.map((item, idx) => {
+      return { ...item, id: `${item.RouteName}-${idx}` };
+    });
+    expect(wrapper.vm.RoadOptions.list).toEqual(result);
+  });
+  it('fetch Road API data', async () => {
+    const spy = vi
+      .spyOn(mockTdxService, 'getCyclingData')
       .mockImplementation(() => Promise.resolve({ data: mockRoadData }));
-    const res = await tdxService.getCyclingData();
+    const res = await mockTdxService.getCyclingData();
     expect(res.data).toEqual(mockRoadData);
     expect(spy.mock.results[0].value.data).toEqual(mockRoadData);
   });
