@@ -16,7 +16,7 @@ export default defineConfig({
     alias: { '@/': `${path.resolve(__dirname, 'src')}/` }
   },
   test: {
-    // globals: true,
+    globals: true,
     environment: 'jsdom'
   }
 });
