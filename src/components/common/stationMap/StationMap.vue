@@ -6,7 +6,7 @@ import userMarkerIcon from '@/statics/assets/icons/user.png';
 
 import { computed, onMounted, reactive, watch, getCurrentInstance } from 'vue';
 import { userLocation } from '@/store';
-import { accessToken } from '@/token.env.js';
+import { accessToken } from '@/ptxToken.env.js';
 import L from 'leaflet';
 
 const props = defineProps({

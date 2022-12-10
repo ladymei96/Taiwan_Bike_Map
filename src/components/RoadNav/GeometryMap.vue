@@ -2,7 +2,7 @@
 import markerIcon from '@/statics/assets/icons/CustomMarker.png';
 
 import { onMounted } from 'vue';
-import { accessToken } from '@/token.env.js';
+import { accessToken } from '@/ptxToken.env.js';
 import L from 'leaflet';
 import Wkt from 'wicket';
 

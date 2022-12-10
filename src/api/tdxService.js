@@ -1,6 +1,6 @@
 import axios from 'axios';
 import jsSHA from 'jssha';
-import { appId, appKey } from '@/token.env.js';
+import { appId, appKey } from '@/ptxToken.env.js';
 
 const basicURL = 'https://ptx.transportdata.tw/MOTC/v2';
 
